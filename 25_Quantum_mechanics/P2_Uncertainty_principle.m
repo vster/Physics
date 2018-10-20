@@ -39,7 +39,7 @@ ksi_2=simplify(ksi'*ksi)
 % delta_x=hp/(m*delta_x0)*t
 syms hp m delta_x0 t
 delta_x=hp/(m*delta_x0)*t
-delta_x1=subs(delta_x,[hp m delta_x0 t],[1e-34 9e-31 1e-10 1])
+delta_x1=subs(delta_x,[hp m delta_x0 t],sym([1e-34 9e-31 1e-10 1],'d'))
 digits(4)
 delta_x1=vpa(delta_x1)
 % 1.111e6 m = 1100 km

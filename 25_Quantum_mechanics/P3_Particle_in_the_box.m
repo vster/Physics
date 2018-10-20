@@ -3,7 +3,8 @@
 % ksi(x,t)=B*exp(1i*k*x-1i*w*t)-B*exp(-1i*k*x-1i*w*t) =
 %    =B*(exp(1i*k*x)-exp(-1i*k*x))*exp(-1i*w*t)
 
-syms x t k w B syms
+clear
+syms x t k w A B 
 ksi=B*exp(1i*k*x-1i*w*t)-B*exp(-1i*k*x-1i*w*t)
 ksi=B*(exp(1i*k*x)-exp(-1i*k*x))*exp(-1i*w*t)
 
@@ -20,8 +21,11 @@ ksi(x)=A*sin(k*x)                   % (25-11)
 % p(n)=hp*k(n)
 % p(n)=n*(pi*hp/L)                  (25-13)
 % E(n)=p(n)^2/(2*m)=n^2*pi^2*hp^2/(2*m*L^2)         (25-14)
+
+% Energy Scale Assessment
 syms n hp m L
-E(n)=n^2*pi^2*hp^2/(2*m*L^2)
+E(n)=n^2*pi^2*hp^2/(sym(2,'d')*m*L^2)
+% (4.93*hp^2*n^2)/(L^2*m)
 digits(3)
 E1=subs(E,[hp m L],[1.05e-34 9.11e-31 1e-10])
 E1=vpa(E1)
@@ -30,8 +34,9 @@ E1=vpa(E1)
 % Example 2
 % L=10e-10 m, n=2
 % hf=E2-E1
+% lam - ?
 syms n
-E1=5.97e-18 % J
+E1=sym(5.97e-18,'d') % J
 E(n)=E1*n^2
 hf=vpa(E(2)-E(1)) 
 % 1.79e-17 J
