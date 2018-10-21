@@ -38,6 +38,7 @@ tan_kx0=eta/k
 
 syms m U0 hp x0
 y0=sqrt(2*m*U0)*x0/hp
+digits(4)
 y0=subs(y0,[m U0 hp x0],sym([9.1e-31 800*1.6e-19 1.05e-34 0.5e-10],'d'))
 vpa(y0)
 % 7.268
