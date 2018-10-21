@@ -1,23 +1,23 @@
 % Particle in the box
 
-% ksi(x,t)=B*exp(1i*k*x-1i*w*t)-B*exp(-1i*k*x-1i*w*t) =
+% psi(x,t)=B*exp(1i*k*x-1i*w*t)-B*exp(-1i*k*x-1i*w*t) =
 %    =B*(exp(1i*k*x)-exp(-1i*k*x))*exp(-1i*w*t)
 
 clear
 syms x t k w A B 
-ksi=B*exp(1i*k*x-1i*w*t)-B*exp(-1i*k*x-1i*w*t)
-ksi=B*(exp(1i*k*x)-exp(-1i*k*x))*exp(-1i*w*t)
+psi=B*exp(1i*k*x-1i*w*t)-B*exp(-1i*k*x-1i*w*t)
+psi=B*(exp(1i*k*x)-exp(-1i*k*x))*exp(-1i*w*t)
 
 % sin(k*x)=(exp(1i*k*x)-exp(-1i*k*x))/2i
 sin_kx=(exp(1i*k*x)-exp(-1i*k*x))/2i
 
 y(x,t)=2i*B*exp(-1i*w*t)*sin(k*x)
 % Put A=2*B*1i then
-ksi(x)=A*sin(k*x)                   % (25-11)
+psi(x)=A*sin(k*x)                   % (25-11)
 % 0=sin(k*L), if k*L=n*pi
 % k(n)=n*pi/L                       (25-12)
 % L=n*(lam/2)
-% ksi(x,n)=A*sin((n*pi/L)*x)
+% psi(x,n)=A*sin((n*pi/L)*x)
 % p(n)=hp*k(n)
 % p(n)=n*(pi*hp/L)                  (25-13)
 % E(n)=p(n)^2/(2*m)=n^2*pi^2*hp^2/(2*m*L^2)         (25-14)

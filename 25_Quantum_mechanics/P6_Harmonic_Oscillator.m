@@ -17,14 +17,14 @@
 % E(n)=(n-1/2)*h*w  (n=1,2,3...)
 
 % Schredinger equation
-% d2ksi/dx2=(2*m/hp^2)*(U0-E)ksi 
+% d2psi/dx2=(2*m/hp^2)*(U0-E)psi 
 % Substitute U=(1/2)m*w^2*x^2
 % then
-% d2ksi/dx2=-(2*m/hp^2)*(E-(1/2)m*w^2*x^2)ksi     (25-21)
-% Guessing ksi(x)=exp(-a*x^2)
+% d2psi/dx2=-(2*m/hp^2)*(E-(1/2)m*w^2*x^2)psi     (25-21)
+% Guessing psi(x)=exp(-a*x^2)
 syms a x 
-ksi=exp(-a*x^2)
-d2ksi=diff(ksi,x,2)
+psi=exp(-a*x^2)
+d2psi=diff(psi,x,2)
 % 4*a^2*x^2*exp(-a*x^2) - 2*a*exp(-a*x^2)
 % 4*a^2*x^2*exp(-a*x^2) - 2*a*exp(-a*x^2)=-(2*m/hp^2)*(E-(1/2)m*w^2*x^2)*exp(-a*x^2)
 % -2*a + 4*a^2*x^2 =-2*m*E/hp^2+(m*w^2/h^2)*x^2

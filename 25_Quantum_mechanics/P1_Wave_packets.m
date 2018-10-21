@@ -8,41 +8,41 @@
 % p=hp*k        (De Broglie ratio)      (25-1)
 
 % wave function
-% ksi=A*exp(1i*(k0-w*t))
+% psi=A*exp(1i*(k0-w*t))
 clear
 syms A k0 w t real
-ksi=A*exp(1i*(k0-w*t))
-ksi_2=simplify(ksi'*ksi)
+psi=A*exp(1i*(k0-w*t))
+psi_2=simplify(psi'*psi)
 % A^2
 
 % Euler's formula
 % exp(i*phi)=cos(phi)+i*sin(phi)
-Re_ksi=real(ksi)
+Re_psi=real(psi)
 % A*cos(k0 - t*w)
-Im_ksi=imag(ksi)
+Im_psi=imag(psi)
 % A*sin(k0 - t*w)
 
 % Wave function at the moment t=0
-% ksi(x,0)=A*exp(-x^2/(4*sigma^2))*exp(i*k0*x)      (25-2)
+% psi(x,0)=A*exp(-x^2/(4*sigma^2))*exp(i*k0*x)      (25-2)
 syms A x sigma k0 real
-ksi=A*exp(-x^2/(4*sigma^2))*exp(i*k0*x)
+psi=A*exp(-x^2/(4*sigma^2))*exp(i*k0*x)
 
-Re_ksi=real(ksi)
+Re_psi=real(psi)
 % A*exp(-x^2/(4*sigma^2))*cos(k0*x)
-Im_ksi=imag(ksi)
+Im_psi=imag(psi)
 % A*exp(-x^2/(4*sigma^2))*sin(k0*x)
-ksi_2=simplify(ksi'*ksi)
+psi_2=simplify(psi'*psi)
 % A^2*exp(-x^2/(2*sigma^2))
 
-%re_ksi_plot=exp(-x^2)*cos(x)
-%fplot(re_ksi_plot)
+%re_psi_plot=exp(-x^2)*cos(x)
+%fplot(re_psi_plot)
 
-%ksi_2_plot=exp(-x^2)
-%fplot(ksi_2_plot)
+%psi_2_plot=exp(-x^2)
+%fplot(psi_2_plot)
 
-% ksi=exp(-x^2/(4*sig^2))*exp(i*k0*x)=sum B(n)*exp(i*k(n)*x)
+% psi=exp(-x^2/(4*sig^2))*exp(i*k0*x)=sum B(n)*exp(i*k(n)*x)
 
-% ksi=exp(-x^2/(4*sig^2))*exp(i*k0*x)= int B(k)*exp(i*k*x)*dk   (25-3)
+% psi=exp(-x^2/(4*sig^2))*exp(i*k0*x)= int B(k)*exp(i*k*x)*dk   (25-3)
 
 syms sigx k k0 x pi real
 I=sigx/sqrt(pi)*int(exp(-sigx^2*(k-k0)^2)*exp(1i*k*x),k)
