@@ -16,11 +16,20 @@ I2=int((OperR(psi(x),x))'*phi(x),x)
 % int(x*conj(psi(x))*phi(x), x)
 % I1=I2 (!)
 
-
+% Hermiticity of OperR2
+I1=int(psi(x)'*OperR2(phi(x),x),x)
+% int(x^2*conj(psi(x))*phi(x), x)
+I2=int((OperR2(psi(x),x))'*phi(x),x)
+% int(x^2*conj(psi(x))*phi(x), x)
+% I1=I2 (!)
 
 % Coordinate operator
 function R=OperR(psi,r)
 R=r*psi;
+end
+
+function R2=OperR2(psi,r)
+R2=r^2*psi;
 end
 
 % Impulse operator
