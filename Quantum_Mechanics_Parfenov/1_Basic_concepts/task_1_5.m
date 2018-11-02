@@ -1,3 +1,4 @@
+clear
 syms x a
 Psi1=a*x
 Psi2=a*x^2
@@ -34,15 +35,3 @@ Psi53=OperD2x(Psi5)
 Psi63=OperD2x(Psi6)
 % -a^2*sin(a*x) = -a^2*Psi6
 
-
-% Dx Operator
-function Dx=OperDx(psi)
-syms x real
-Dx=diff(psi,x);
-end
-
-% D2x Operator
-function D2x=OperD2x(psi)
-syms x real
-D2x=diff(psi,x,2);
-end

@@ -41,6 +41,7 @@ function H=OperH(psi,m,U)
 H=OperE(psi,m)+U;
 end
 
+% Momentum operator
 function L=OperL(psi)
 syms hp
 syms x y z
