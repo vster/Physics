@@ -1,0 +1,1 @@
+% P_a_a+da = da int int |Psi(x,y,z,t)|^2 dydz
