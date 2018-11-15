@@ -1,4 +1,4 @@
-syms r a0 real
+syms A r a0 real
 assume(a0>0)
 Psi=A*exp(-r/a0)
 % a0=4*pi*eps0*hp^2/(m*e^2)
