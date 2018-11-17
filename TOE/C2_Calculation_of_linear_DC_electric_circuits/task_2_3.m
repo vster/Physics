@@ -1,0 +1,11 @@
+syms R1 R2 R3 R4 R5 R6
+R123=R1+R2+R3
+R56=R5+R6
+R1234=R123*R4/(R123+R4)
+Re1=R1234*R56/(R1+R2+R3+R4+R5+R6)
+Re1=simplify(Re)
+pretty(Re1)
+
+Re2=simplify(R1234*R56/(R1234+R56))
+
+T=simplify(Re2-Re1)
