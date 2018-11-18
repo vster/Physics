@@ -16,4 +16,8 @@
 % or
 % phi=psiu-psii=+90gr
 
+% Capacity C
+% I=U/XC = U*bC
+% XC=1/(w*C) - capacitance
+% bC=1/XC = w*C - capacitive conductivity
 
