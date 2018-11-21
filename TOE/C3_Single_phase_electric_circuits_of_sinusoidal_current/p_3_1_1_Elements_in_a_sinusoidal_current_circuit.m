@@ -12,7 +12,7 @@
 % XL=w*L - inductive resistance
 % bL=1/XL=1/(w*L) - Inductive conductivity
 % Initial phase of current
-% psii=pisu-90gr
+% psii=psiu-90gr
 % or
 % phi=psiu-psii=+90gr
 
@@ -20,4 +20,7 @@
 % I=U/XC = U*bC
 % XC=1/(w*C) - capacitance
 % bC=1/XC = w*C - capacitive conductivity
+% psiu=psii-90gr
+% or
+% phi=psiu-psii=-90gr
 
