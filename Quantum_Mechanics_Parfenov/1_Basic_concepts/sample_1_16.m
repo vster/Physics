@@ -1,7 +1,7 @@
 % x in (0,b)
 % Psi=a*x*(b-x)
 
-syms x a b
+syms x a b m
 Psi=a*x*(b-x)
 xm=int(Psi*x*Psi,x,0,b)
 % (a^2*b^6)/60
