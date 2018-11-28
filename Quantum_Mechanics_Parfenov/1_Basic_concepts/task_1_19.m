@@ -4,31 +4,85 @@ syms Psi(x,y,z)
 
 % a) [Lx,Ly]
 Lz=simplify(OperLz(Psi))
-% hp*y*diff(Psi(x), x)*1i
+% -hp*(x*diff(Psi(x, y, z), y) - y*diff(Psi(x, y, z), x))*1i
 Sw1=simplify(OperLx(OperLy(Psi))-OperLy(OperLx(Psi)))
 % hp^2*(x*diff(Psi(x, y, z), y) - y*diff(Psi(x, y, z), x))
-k1=Sw1/Lz
+sk1=Sw1/Lz
 % hp*1i
-% Sw1 = hp*1i*Lz
+% = hp*1i*Lz
 
+% b) [Lx,y]
+Sw2=simplify(OperLx(OperY(Psi))-OperY(OperLx(Psi)))
+% hp*z*Psi(x, y, z)*1i
+sk2=Sw2/Psi
+% hp*z*1i
+% = i*hp*z
+
+% c) [Lx,py]
+Sw3=simplify(OperLx(OperPy(Psi))-OperPy(OperLx(Psi)))
+% hp^2*diff(Psi(x, y, z), z)
+pz=OperPz(Psi)
+% -hp*diff(Psi(x, y, z), z)*1i
+sk3=Sw3/pz
+% hp*1i
+% = i*hp*pz  -?
+
+% d) [px,Lz]
+Sw4=simplify(OperPx(OperLz(Psi))-OperLz(OperPx(Psi)))
+% -hp^2*diff(Psi(x, y, z), y)
+py=OperPy(Psi)
+% -hp*diff(Psi(x, y, z), y)*1i
+sk4=Sw4/py
+% -hp*1i
+% =-1i*hp*py
+
+% e) [Lx,Lz]
+Sw5=simplify(OperLx(OperLz(Psi))-OperLz(OperLx(Psi)))
+% hp^2*(x*diff(Psi(x, y, z), z) - z*diff(Psi(x, y, z), x))
+Ly=OperLy(Psi)
+% hp*(x*diff(Psi(x, y, z), z) - z*diff(Psi(x, y, z), x))*1i
+sk5=Sw5/Ly
+% -hp*1i
+% =-1i*hp*Ly  -?
+
+% Coordinate operator
+function y=OperY(psi)
+syms x y z hp real
+y=y*psi;
+end
+
+% Impulse operator
+function P=OperPx(psi)
+syms x y z hp real
+P=-1i*hp*diff(psi,x);
+end
+
+% Impulse operator
+function P=OperPy(psi)
+syms x y z hp real
+P=-1i*hp*diff(psi,y);
+end
+
+% Impulse operator
+function P=OperPz(psi)
+syms x y z hp real
+P=-1i*hp*diff(psi,z);
+end
 
 % Momentum operator Lx
 function Lx=OperLx(psi)
-syms hp
-syms x y z
+syms x y z hp real
 Lx=-i*hp*(y*diff(psi,z)-z*diff(psi,y));
 end
 
 % Momentum operator Ly
 function Ly=OperLy(psi)
-syms hp
-syms x y z
+syms x y z hp real
 Ly=-i*hp*(z*diff(psi,x)-x*diff(psi,z));
 end
 
 % Momentum operator Lz
 function Lz=OperLz(psi)
-syms hp
-syms x y z
+syms x y z hp real
 Lz=-i*hp*(x*diff(psi,y)-y*diff(psi,x));
 end
