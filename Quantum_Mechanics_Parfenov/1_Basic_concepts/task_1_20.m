@@ -2,10 +2,10 @@ clear
 syms x y z hp real
 syms Psi(x) U(x)
 
-H1=OperH(Psi)
+H1=OperH(Psi,U)
 % Psi(x)*U(x) - (hp^2*diff(Psi(x), x, x))/(2*m)
 
-% a) [x,H)
+% a) [x,H]
 Sw1=simplify(OperX(OperH(Psi,U))-OperH(OperX(Psi),U))
 % (hp^2*diff(Psi(x), x))/m
 px=OperPx(Psi)
