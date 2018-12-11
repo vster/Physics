@@ -1,4 +1,4 @@
-syms hi k x 
+syms hi k x real
 Psi=cos(hi)*exp(1i*k*x)+sin(hi)*exp(-1i*k*x)
 
 px=simplify(Psi'*OperP(Psi))
