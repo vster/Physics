@@ -1,8 +1,12 @@
 % OperH=OperP2/(2*m)+U(|r|)
 syms r
 syms Psi(r)
+
+% [OperP2,OperP]
 sw1=simplify(OperP2(OperP(Psi))-OperP(OperP2(Psi)))
 % 0
+
+% [OperR,OperP]
 sw2=simplify(OperR(OperP(Psi))-OperP(OperR(Psi)))
 % hp*Psi(r)*1i 
 sk2=sw2/Psi(r)
