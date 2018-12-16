@@ -17,6 +17,7 @@ Um=int(Psi'*OperU(Psi),x,-inf,inf)
 % int(U*conj(Psi(x))*Psi(x), x, -Inf, Inf)
 Ekm=int(Psi'*OperEx(Psi),x,-inf,inf)
 % int(-(hp^2*conj(Psi(x))*diff(Psi(x), x, x))/(2*m), x, -Inf, Inf)
+pretty(Ekm)
 
 % Coordinate operator
 function x=OperX(f)
