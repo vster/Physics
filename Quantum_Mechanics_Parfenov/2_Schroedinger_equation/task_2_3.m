@@ -1,6 +1,7 @@
 % Prove
 % m*d<x^2>/dt=<xp>+<px>
-syms x m hp real
+clear
+syms x m hp t real1
 syms Psi(x)
 % A=x^2
 
