@@ -47,14 +47,14 @@ Px=-1i*hp*diff(psi,x);
 end
 
 % Kinetic energy operator
-function E=OperE(psi)
+function Ek=OperEk(psi)
 syms x hp m real
-E=-hp^2/(2*m)*diff(psi,x,2);
+Ek=-hp^2/(2*m)*diff(psi,x,2);
 end
 
 % Total energy operator (Hamiltonian)
 function H=OperH(psi)
 syms x real
 syms U(x)
-H=OperE(psi)+U*psi;
+H=OperEk(psi)+U*psi;
 end
