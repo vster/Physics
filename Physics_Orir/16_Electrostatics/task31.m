@@ -1,4 +1,4 @@
-syms k0 lam r alfa
+syms k0 lam r alfa x0
 E=2*k0*lam/r
 
 V=int(E,r)
