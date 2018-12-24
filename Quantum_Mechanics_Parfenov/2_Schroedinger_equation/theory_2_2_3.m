@@ -45,12 +45,12 @@ Em=int(eq1,x)
 % int(c1*conj(psi1(x))*conj(c1)*U(x)*psi1(x) + c1*conj(psi2(x))*conj(c2)*U(x)*psi1(x) + c2*conj(psi1(x))*conj(c1)*U(x)*psi2(x) + c2*conj(psi2(x))*conj(c2)*U(x)*psi2(x) - (c1*hp^2*conj(psi1(x))*conj(c1)*diff(psi1(x), x, x))/(2*m) - (c1*hp^2*conj(psi2(x))*conj(c2)*diff(psi1(x), x, x))/(2*m) - (c2*hp^2*conj(psi1(x))*conj(c1)*diff(psi2(x), x, x))/(2*m) - (c2*hp^2*conj(psi2(x))*conj(c2)*diff(psi2(x), x, x))/(2*m), x)
 syms U(x) m hp
 Em= int(c1*conj(psi1(x))*conj(c1)*U(x)*psi1(x) + c2*conj(psi2(x))*conj(c2)*U(x)*psi2(x) - (c1*hp^2*conj(psi1(x))*conj(c1)*diff(psi1(x), x, x))/(2*m) - (c2*hp^2*conj(psi2(x))*conj(c2)*diff(psi2(x), x, x))/(2*m), x)
-syms E1 E2
-Em = abs(c1)^2*E1+abs(c2)^2*E2
 
 d=expand(Em-(Ec1+Ec2))
 % 0    
 
+syms E1 E2
+Em = abs(c1)^2*E1+abs(c2)^2*E2
 E2m=int(psi'*OperH2(psi),x)
 %...
 E2m =  abs(c1)^2*E1^2+abs(c2)^2*E2^2
@@ -78,7 +78,6 @@ Psi2=abs(c1)^2*psi1^2+abs(c2)^2*psi2^2+2*c1*c2*psi1*psi2*cos((E2-E1)*t/hp)
 %  = int()(sum()c(m)psi(m))'*OperH(sum()c(n)*psi(n))*d_ksi=
 %  = sum()sum()c(m)'*c(n)*E(n)*int()psi'*psi*s_ksi
 %  = sum()abs(c(n))^2*E(n)
-
 
 function H=OperH(psi)
 syms x hp m real
