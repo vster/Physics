@@ -47,7 +47,7 @@ R=(sqrt(E+U0)/(sqrt(E+U0)+sqrt(E))-sqrt(E)/(sqrt(E+U0)+sqrt(E)))^2
 % R~U0/(4*E) -?  (U0^2/(16*E^2) -?)
 
 % 4) -U0<E<0
-psi2=exp(i*sqrt(2*m*E)*/hp)
+psi2=exp(i*sqrt(2*m*E)/hp)
 % E<0 > k=sqrt(2*m*E)/hp is imaginary
 % k=i*k1
 % where k1 is real number
