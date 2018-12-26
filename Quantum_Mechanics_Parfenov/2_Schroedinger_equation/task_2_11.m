@@ -44,10 +44,11 @@ T=2*sqrt(E)*sqrt(E+U0)/(sqrt(E+U0)+sqrt(E))^2
 
 R1=simplify(subs(R,E,U0/3))
 R1=vpa(R1)
+% 0.111
+T1=1-R1
+% 0.889
 
-T1=simplify(subs(T,E,U0/3))
-T1=vpa(T1)
-% 0.111 
-
-T2=simplify(subs(T,[E U0],[4 12]))
-% 4/9 - ?
+R2=simplify(subs(R,[E U0],[4 12]))
+% 1/9
+T2=1-R2
+% 8/9
