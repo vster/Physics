@@ -32,7 +32,9 @@ In=simplify(subs(In,sin(pi*n),0))
 % -(a*abs(B)^2*(sin(2*pi*n) - 2*pi*n))/(4*n*pi)
 In=simplify(subs(In,sin(2*pi*n),0))
 % (a*abs(B)^2)/2 = 1 => 
-% B=sqrt(2/a) => psi(n)=sqrt(2/a)*sin(pi*n*x/a)
+% B=sqrt(2/a) => 
+% psi(n)=sqrt(2/a)*sin(pi*n*x/a)
+
 % k=sqrt(2*m*E)/hp => 
 % E(n)=hp^2*k^2/(2*m)
 % k*a=pi*n => k=pi*n/a
