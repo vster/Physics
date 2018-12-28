@@ -5,7 +5,7 @@ px=simplify(Psi'*OperP(Psi))
 % hp*k*(cos(2*hi) + sin(2*hi)*sin(2*k*x)*1i)
 pxm=int(simplify(Psi'*OperP(Psi)),x)
 
-nf=int(Psi'*Psi,x,-pi/k,pi/k)
+nf=int(Psi'*Psi,x)
 
 % ...?
 
