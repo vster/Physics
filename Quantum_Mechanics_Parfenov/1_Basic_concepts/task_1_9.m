@@ -9,13 +9,13 @@ pxm=int(simplify(Psi'*OperP(Psi)),x)
 nf=int(Psi'*Psi,x)
 
 % a)
-p1=int(hp*k*OperP(Psi),x)
-% - hp^2*k*cos(hi)*(cos(k*x) + sin(k*x)*1i)*1i - hp^2*k*sin(hi)*(cos(k*x) - sin(k*x)*1i)*1i
-p1= - hp^2*k*(cos(hi)*exp(i*k*x)*1i+sin(hi)*exp(-i*k*x)*1i)
+p1=int(hp*k*Psi,x)
+% - hp*cos(hi)*(cos(k*x) + sin(k*x)*1i)*1i + hp*sin(hi)*(cos(k*x) - sin(k*x)*1i)*1i
+% - 1i*hp*cos(hi)*exp(i*k*x)+1i*hp*sin(hi)*exp(-i*k*x)
 
-p2=int((-hp*k)*OperP(Psi),x)
-% hp^2*k*cos(hi)*(cos(k*x) + sin(k*x)*1i)*1i + hp^2*k*sin(hi)*(cos(k*x) - sin(k*x)*1i)*1i
-p2= hp^2*k*(cos(hi)*exp(i*k*x)*1i + sin(hi)*exp(-i*k*x)*1i)
+p2=int((-hp*k)*Psi,x)
+% hp*cos(hi)*(cos(k*x) + sin(k*x)*1i)*1i - hp*sin(hi)*(cos(k*x) - sin(k*x)*1i)*1i
+% 1i*hp*cos(hi)*exp(i*k*x)-1i*hp*sin(hi)*exp(-i*k*x)
 
 % Impulse operator
 function P=OperP(psi)
