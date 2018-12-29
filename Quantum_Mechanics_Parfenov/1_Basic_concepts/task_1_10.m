@@ -3,8 +3,8 @@ syms k x
 
 % a)
 Psi=exp(1i*k*x)
-pxm=Psi'*OperP(Psi)
-% hp*k
+pxm=int(Psi'*OperP(Psi))
+% (hp*k^2)/2
 
 % b)
 syms sigx
