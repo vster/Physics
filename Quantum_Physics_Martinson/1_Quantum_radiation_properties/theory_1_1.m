@@ -37,3 +37,4 @@ rbb(lam,T)=((2*pi*c)^4/lam^5)*f(2*pi*c/(lam*T))
 pretty(rbb(lam,T))
 % lam_m=b/T                                 (1.11)
 lam_m=b/T
+% b=2.898e-3 m*K
