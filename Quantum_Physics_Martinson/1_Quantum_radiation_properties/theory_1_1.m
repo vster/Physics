@@ -24,9 +24,16 @@ R=int(r(w,T),w,0,inf)
 % sigma is Stefan-Boltzmann constant
 % Energy luminosity of real bodies
 % R=A(T)*Rbb=A(T)*sigma*T^4                 (1.8)
+syms sigma A(T)
+R=A(T)*sigma*T^4
 % A(T)<1 is integral body absorption
 
 % Wien's displacement law
 % rbb(w,T)=w^3*f(w/T)                       (1.9)
+syms lam b c f(x)
+rbb(w,T)=w^3*f(w/T)
 % rbb(lam,T)=((2*pi*c)^4/lam^5)*f(2*pi*c/(lam*T))      (1.10)
+rbb(lam,T)=((2*pi*c)^4/lam^5)*f(2*pi*c/(lam*T))
+pretty(rbb(lam,T))
 % lam_m=b/T                                 (1.11)
+lam_m=b/T
