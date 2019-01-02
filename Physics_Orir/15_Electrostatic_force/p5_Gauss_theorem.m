@@ -7,7 +7,12 @@
 % Gauss theorem
 % int(S)E*dA=4*pi*k0*Qin          (15-7)
 
-% Ph=4*pi*k0*Qin
+syms k0 Qin
+Ph=4*pi*k0*Qin
+
+syms N m C
+Ph_si=subs(Ph,[k0 Qin],[N*m^2/C^2 C])
+% (4*pi*N*m^2)/C ~ N*m^2/C
 
 % Change k0 to 1/(4*pi*eps0)
 % then

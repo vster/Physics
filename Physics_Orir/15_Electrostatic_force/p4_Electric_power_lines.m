@@ -15,9 +15,15 @@
 
 % sphere around charge
 % Ph=E*(4*pi*r1^2)=(k0*Q/r1^2)*(4*pi*r1^2)=4*pi*k0*Q
-% Ph=4*pi*k0*Q
+syms k0 Q
+Ph=4*pi*k0*Q
+
+syms N m C
+Ph_si=subs(Ph,[k0 Q],[N*m^2/C^2 C])
+% (4*pi*N*m^2)/C ~ N*m^2/C
 
 % Ph=sum E*dA = int(S1)E*dA1
 % int(S)E*dA=4*pi*k0Q
+
 
 
