@@ -7,9 +7,20 @@
 
 % Potential energy point charges Q and q
 % U=k0*q*Q/r
+syms k0 q Q r
+U=k0*q*Q/r
+
+syms N m C
+U_si=subs(U,[k0 q Q r],[N*m^2/C^2 C C m])
+% N*m ~ J ~ kg*m^2/s^2
 
 % Determination of electric potential
-% V=U/q
+syms U q
+V=U/q
+
+syms J C
+V_si=subs(V,[U q],[J C])
+% J/C ~ V
 
 % Point charge potential
 % V=k0*Q/r

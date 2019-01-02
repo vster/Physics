@@ -11,3 +11,9 @@ k0=9e9
 
 f=sqrt(k0*e^2/(me*R^3))/(2*pi)
 % 2.5324e+15 Hz
+
+syms k0 e me R
+f=sqrt(k0*e^2/(me*R^3))/(2*pi)
+syms N m C kg s
+f_si=subs(f,[k0 e me R],[kg*m^3/(s^2*C^2) C kg m])
+% (1/s^2)^(1/2)/(2*pi) ~ 1/s ~ Hz
