@@ -1,8 +1,10 @@
 % Hypothesis of quanta. Planck's formula.
 % E=h*nu or  E=hp*w                    (1.31)
+% h=6.62618e-34 J*s
+
 % <eps>=sum(n=0:inf)P(n)*eps(n)        (1.32)
 % where 
-% eps(n)=n*hp*w is possible value of radiation energy
+% eps(n)=n*hp*w is possible value of radiation energy, J
 % P(n) - the probability that the radiation will have energy eps(n)
 
 % P(n)=A*exp(-eps(n)/(k*T))            (1.33)
@@ -31,6 +33,10 @@ eps_m=subs(eps_m,ksi,hp*w/(k*T))
 % eps_m=(hp*w)/(exp((hp*w)/(T*k)) - 1)           (1.37)
 pretty(eps_m)
 
+syms J s K
+eps_m_si=subs(eps_m,[hp w T k],[J*s 1/s K J/K])
+% J/(exp(1) - 1) ~ J
+
 % If hp*w/(k*T)<<1  => exp(hw/(k*T))~1+hw/(k*T)
 % then we get classic formula
 % esp_m=k*T
@@ -39,13 +45,23 @@ u(w,T)=w^2*eps_m/(sym(pi)^2*c^3)
 % u(w,T)=(hp*w^3)/(c^3*pi^2*(exp((hp*w)/(T*k)) - 1))  (1.38)
 pretty(u(w,T))
 
+syms J s m K
+uwT_si=subs(u(w,T),[hp w c T k],[J*s 1/s m/s K J/K])
+% (J*s)/(m^3*pi^2*(exp(1) - 1)) ~ J*s/m^3
+
 % Use (1.17)  we get Planck function
 rbb(w,T)=c/4*u(w,T)
 % rbb(w,T)=(hp*w^3)/(4*c^2*pi^2*(exp((hp*w)/(T*k)) - 1))   (1.39)
 pretty(rbb(w,T))
+
+rbbwT_si=subs(rbb(w,T),[hp w c T k pi],[J*s 1/s m/s K J/K 1])
+% J/(4*m^2*(exp(1) - 1)) ~ J/m^2
 
 % At large frequencies if hp*w>>k*T => exp(hp*w/(k*T))>>1
 % then (1.39) goto
 f(w,T)=hp*w^3/(sym(4)*sym(pi)^2*c^2)*exp(-(hp*w)/(k*T))
 % f(w,T)=(hp*w^3*exp(-(hp*w)/(T*k)))/(4*c^2*pi^2)         (1.40)
 pretty(f(w,T))
+
+fwT_si=subs(f(w,T),[hp w c T k pi],[J*s 1/s m/s K J/K 1])
+% (J*exp(-1))/(4*m^2) ~ J/m^2

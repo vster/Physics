@@ -21,6 +21,12 @@ Phi=c/(4*pi)*u(T)*int(int(cos(teta)*sin(teta),teta,0,pi/2),phi,0,2*pi)
 % or
 % u(w,T)=4/c*rbb(w,T)                    (1.17)
 
+syms uT Rbb
+uT=4/c*Rbb
+syms m s W
+uT_si=subs(uT,[c Rbb],[m/s W/m^2])
+% (4*W*s)/m^3 ~ J/m^3
+
 % Rayleigh-Jeans Formula
 % l=n1*lam/2, n1=1,2,3...                (1.18)
 % l is the distance between the walls
@@ -59,5 +65,9 @@ pretty(u(w,T))
 rbb(w,T)=c/4*u(w,T)
 % rbb(w,T)=(T*k*w^2)/(4*c^2*pi^2)
 % Correct for small frequencies
+
+syms K J m s
+rbb_si=subs(rbb(w,T),[T k w c],[K J/K 1/s m/s])
+% J/(4*m^2*pi^2) ~ J/m^2
 
 % u(T)=4/c*Rbb=int(0:inf)u(w,T)dw=k*T/(pi^2*c^3)*int(0:inf)w^2dw->inf

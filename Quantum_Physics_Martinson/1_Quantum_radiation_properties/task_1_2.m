@@ -16,8 +16,15 @@ C=sigma*T^4*(Rs/Rse)^2
 C1=vpa(subs(C,[sigma T Rs Rse],[5.67e-8 T1 6.95e8 1.49e11]))
 % 1644.0 W = 1.6 kW
 
+syms W m K
+C_si=subs(C,[sigma T Rs Rse],[W/(m^2*K^4) K m m])
+% W/m^2
+
 % Pel=eta*C*S => S=Pel/(eta*C)
 syms Pel eta C
 S=Pel/(eta*C)
 S1=vpa(subs(S,[Pel eta C],[1e4 0.2 C1]))
 % 30.4 m^2
+
+S_si=subs(S,[Pel eta C],[W 1 W/m^2])
+% m^2

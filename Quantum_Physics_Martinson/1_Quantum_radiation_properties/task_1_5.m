@@ -19,6 +19,11 @@ nf=int(dnw/dksi,ksi,0,inf)
 nf=(sym(2.4)*T^3*k^3)/(c^3*hp^3*sym(pi)^2)
 % (12*T^3*k^3)/(5*c^3*hp^3*pi^2)
 pretty(nf)
+
+syms K J m s
+nf_si=subs(nf,[T k c hp],[K J/K m/s J*s])
+% 12/(5*m^3*pi^2) ~ 1/m^3
+
 digits(4)
 nf1=vpa(subs(nf,[k c hp T],[1.38e-23 2.998e8 1.054e-34 10]))
 % 2.025e10 1/m^3   -? 9e9
