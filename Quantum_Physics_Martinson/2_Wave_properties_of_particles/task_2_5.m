@@ -1,0 +1,1 @@
+% delta_x>=hp/(2*delta_px)~hp/(2*p)=lamB/(4*pi)
