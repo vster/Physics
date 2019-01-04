@@ -4,11 +4,19 @@
 
 % Two plates
 % C=Q/DV=A/(4*pi*k0*x0)            (16-20)
+clear
+syms A k0 x0
+C=A/(4*pi*k0*x0)
+
+syms m N Cl
+C_si=subs(C,[A k0 x0],[m^2 N*m^2/Cl^2 m])
+% Cl^2/(4*N*m*pi)~Cl^2/(N*m)~F~Cl/V~N*m/V^2~Cl^2/J
 
 % Coaxial cable
 % Cl=lam/DV
 % DV=2*k0*lam*log(b/a)
-% Cl=1/(2*k0*log(b/a))
+syms b a
+Cl=1/(2*k0*log(b/a))                   % (16-21)
 
 % Energy accumulation
 % Q0=C*V0
