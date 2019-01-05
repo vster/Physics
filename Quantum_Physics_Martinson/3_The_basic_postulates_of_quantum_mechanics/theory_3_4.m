@@ -32,6 +32,14 @@ OperL2(Psi)                     % (3.35)
 
 OperL(Psi)
 
+syms r phi teta
+syms PsiS(r,phi,teta)
+OperLxS(PsiS)
+OperLyS(PsiS)                     % (3.36)
+OperLzS(PsiS)
+
+OperL2S(PsiS)
+
 % 4. Energy operators
 OperEk(Psi)                     % (3.37)
 OperU(Psi)                      
