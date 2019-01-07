@@ -10,9 +10,19 @@
 
 % The designation proposed by Dirac
 % <n|OperPhi|m> or <n|f|m>              (3.89)
+syms n1 n2 m1 m2
+% |m>
+ket_m=[m1;m2]
+% <n|
+bra_n=[n1 n2]
 
 % <n|m>=<n|OperI|m>
 % OperI - single operator for which OperI(Psi(m))=Psi(m)
+OperI=[1 0;0 1]
+% <n|m>
+bra_n*ket_m
+% <n|OperI|m>
+bra_n*OperI*ket_m
 
 % <n|m>=<Psi(n)|Psi(m)>=int(RN)Psi(n)'*Psi(m)*dV=
 %   = delta(n,m)=kroneckerDelta(n,m)
