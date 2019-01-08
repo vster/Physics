@@ -23,6 +23,10 @@ psin1n2n3(x,y,z)=simplify(psi1n1(x)*psi2n2(x)*psi3n3(x))
 % 2*2^(1/2)*sin((pi*n1*x)/a1)*sin((pi*n2*x)/a2)*sin((pi*n3*x)/a3)*
 %               *(1/a1)^(1/2)*(1/a2)^(1/2)*(1/a3)^(1/2)
 
+syms a
+psin1n2n3(x,y,z)=subs(psin1n2n3(x,y,z),[a1 a2 a3],[a a a])
+% 2*2^(1/2)*sin((pi*n1*x)/a)*sin((pi*n2*x)/a)*sin((pi*n3*x)/a)*(1/a)^(3/2)
+
 syms pi
 E1n1=(hp^2*n1^2*pi^2)/(2*a1^2*m0)
 E2n2=(hp^2*n2^2*pi^2)/(2*a2^2*m0)
@@ -31,7 +35,7 @@ E3n3=(hp^2*n3^2*pi^2)/(2*a3^2*m0)
 En1n2n3=E1n1+E2n2+E3n3
 % (hp^2*pi^2)/(2*m0)((n1/a1)^2+(n2/a2)^2+(n3/a3)^2)    (4.27)
 % Put a1=a2=a3=a
-syms a
+
 En1n2n3=simplify(subs(En1n2n3,[a1 a2 a3],[a a a]))
 % (hp^2*pi^2*(n1^2 + n2^2 + n3^2))/(2*a^2*m0)              (4.28)
 % n1,n2,n3=1,2,3...

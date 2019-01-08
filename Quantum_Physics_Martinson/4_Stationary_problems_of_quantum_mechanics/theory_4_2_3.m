@@ -33,6 +33,10 @@ psin1n2(x,y)=psi1n1(x)*psi2n2(y)
 % 2*sin((pi*n1*x)/a1)*sin((pi*n2*y)/a2)*(1/a1)^(1/2)*(1/a2)^(1/2)  (4.23)
 % 0<x<a1, 0<y<a2, n1,n2=1,2,3...
 
+syms a
+psin1n2(x,y)=subs(psin1n2(x,y),[a1 a2],[a a])
+% (2*sin((pi*n1*x)/a)*sin((pi*n2*y)/a))/a
+
 syms pi
 E1n1=(hp^2*n1^2*pi^2)/(2*a1^2*m0)
 E2n2=(hp^2*n2^2*pi^2)/(2*a2^2*m0)
@@ -43,6 +47,5 @@ En1n2=simplify(E1n1+E2n2)
 pretty(En1n2)
 
 % Put a1=a2=a, then
-syms a
 En1n2=simplify(subs(En1n2,[a1 a2],[a a]))
 % (hp^2*pi^2*(n1^2 + n2^2))/(2*a^2*m0), n1,n2=1,2,3...       (4.25)
