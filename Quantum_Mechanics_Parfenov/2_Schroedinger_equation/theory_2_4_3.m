@@ -37,4 +37,5 @@ eq11=expand(eq10*r)
 % k=sqrt(2*E*m*)/hp
 syms k
 eq12=diff(X, r, r) + k^2*X
+XSol=dsolve(eq12)
 % C6*exp(k*r*1i) + C7*exp(-k*r*1i)
