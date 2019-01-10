@@ -58,7 +58,7 @@ psi2(x)=subs(psi2,[A2 B2],[0 B22])
 % (2*k1*exp(-k2*x))/(k1 + k2*1i)
 
 % R=|jotr|/|jpad|                           (4.35)
-% j=i*hp/(2*m0)*(psi*grad(psi')-psi'*grad(psi))
+% j=i*hp/(2*m0)*(psi*grad(psi')-psi'*grad(psi))           (4.36)
 psipad=exp(k1*x*1i)
 jpad=i*hp/(2*m0)*(psipad*diff(psipad',x)-psipad'*diff(psipad,x))
 % (hp*k1)/m0
@@ -80,6 +80,8 @@ D=abs(jpr/jpad)
 % w2(x)=dP/dt
 w2(x)=simplify(psi2(x)^2)
 % (4*k1^2*exp(-2*k2*x))/(k1 + k2*1i)^2
+% (4*k1^2/(k1^2+k2^2)*exp(-2/hp*sqrt(2*m0*(U0-E)*x)        (4.37)
+
 w22=subs(w2,[k1 k2],[sqrt(2*m0*E/hp^2) sqrt((2*m0/hp^2)*(U0-E))])
 w22=simplify(w22)
 
