@@ -41,7 +41,7 @@ am_ap=a_minus*a_plus
 % [a-,a+]=1
 % H=hp*w*(a_plus*a_minus+1/2)                                    (2.29)
 % hp*w*(a+-*a-+ +- 1/2)psi=E*psi                        (2.30)
-eq11=hp*w*(a_plus*a_minus+1/2)*psi-E*psi
+eq11=hp*w*(a_plus*a_minus+1/2)*psi(x)-E*psi(x)
 % a_minus(phi0)=0                                              (2.31)
 
 % 1/sqrt(2*hp*m*w)*(i*p+m*w*x)psi0=0 =>
