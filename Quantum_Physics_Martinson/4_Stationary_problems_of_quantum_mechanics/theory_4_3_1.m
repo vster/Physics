@@ -15,7 +15,7 @@ eq2=diff(psi2,x,2)+2*m0/hp^2*(E-U0)*psi2
 k1=sqrt(2*m0*E/hp^2)                     % (4.29)
 k2=sqrt((2*m0/hp^2)*(U0-E))
 
-syms k1 k2
+syms k1 k2 real
 eq3=diff(psi1,x,2)+k1^2*psi1             % (4.30a)
 eq4=diff(psi2,x,2)-k2^2*psi2             % (4.30b)
 
