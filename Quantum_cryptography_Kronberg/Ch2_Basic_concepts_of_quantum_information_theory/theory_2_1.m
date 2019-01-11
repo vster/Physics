@@ -1,14 +1,14 @@
 % Quantum states
 
 % Quantum function and pure states
-syms psi1 psi2
-syms phi1 phi2
+clear
+n=3
 % |psi>
-ket_psi=[psi1;psi2]
+ket_psi=sym('psi',[n,1])
 % <psi|
 bra_psi=ket_psi'
 % |phi>
-ket_phi=[phi1;phi2]
+ket_phi=sym('phi',[n,1])
 % <phi|
 bra_phi=ket_phi'
 
@@ -19,15 +19,23 @@ bra_phi*ket_psi
 % ro_phi=|psi><psi|
 ro_phi=ket_psi*bra_psi
 
-syms p1 p2
-OperRo=[p1 0;0 p2]
+Ones=ones(1,n)
+I=eye(n)
+Pv=sym('p',[n 1])
+OpRo=Pv*Ones
+OpRo=OpRo.*I
+
 % sum(i)pi=1
 % p1+p2=1
 
 % <psi|ro|phi> = sum(i)p(i)|<phi|psi>|^2
-simplify(bra_psi*OperRo*ket_phi)
+simplify(bra_psi*OpRo*ket_phi)
 % p1*phi1*conj(psi1) + p2*phi2*conj(psi2)
 
+n1=3
+ket_lam=sym('lam',[n1,1])
+bra_lam=ket_lam'
+A=ket_lam*bra_lam
 % A=sum(i)lam(i)|lam(i)><lam(i)|
 
 % State change over time
