@@ -30,23 +30,35 @@ E(n)=hp*w*(n+1/2)
 % a_plus/minus=1/sqrt(2*hp*m*w)*(-+i*p+m*w*x)
 % a_minus*a_plus=1/(2*hp*m*w)*(i*p+m*w*x)*(-i*p+m*w*x)
 
-syms p
-a_plus=1/sqrt(2*hp*m*w)*(-i*p+m*w*x)
-a_minus=1/sqrt(2*hp*m*w)*(i*p+m*w*x)
-am_ap=a_minus*a_plus
-% -((m*w*x + p*1i)*(p*1i - m*w*x))/(hp*m*w*2)
-% =1/(hp*m*w*2)*(p^2+(m*w*x)^2-i*m*w*(x*p-p*x))
-%                =OpH           [x,p]=i*hp
-% a-*a+=1/(hp*w)*H+1/2 or H=h*w*(a-*a+-1/2)             (2.28)
+AmAp=OpAm(OpAp(psi))
+% psi(x)/2 - (hp*diff(psi(x), x, x))/(2*m*w) + (m*w*x^2*psi(x))/(2*hp)
+H=expand(OpH(psi)/(hp*w))
+% (m*w*x^2*psi(x))/(2*hp) - (hp*diff(psi(x), x, x))/(2*m*w)
+% AmAp=psi(x)/2+OpH(psi)/(hp*w)
+% a-*a+=1/(hp*w)*H+1/2 or 
+% H=h*w*(a-*a+-1/2)                               (2.28)
+
+SwAmAp=OpAm(OpAp(psi))-OpAp(OpAm(psi))
+% psi(x)
 % [a-,a+]=1
+
 % H=hp*w*(a_plus*a_minus+1/2)                                    (2.29)
 % hp*w*(a+-*a-+ +- 1/2)psi=E*psi                        (2.30)
-eq11=hp*w*(a_plus*a_minus+1/2)*psi(x)-E*psi(x)
-% a_minus(phi0)=0                                              (2.31)
+% hp*w*(OpAp(OpAm(psi))+1/2*psi)=E*psi
+% hp*w*(OpAm(OpAp(psi))-1/2*psi)=E*psi
+
+% eq11=hp*w*(a_plus*a_minus+1/2)*psi(x)-E*psi(x)
+syms E
+eq12=hp*w*(OpAp(OpAm(psi(x)))+1/2*(psi(x)))-E*psi(x)
+
+% a_minus(psi0)=0                                              (2.31)
+syms psi0(x)
+eq13=OpAm(psi0) %=0
+% (2^(1/2)*hp*diff(psi0(x), x))/(2*(hp*m*w)^(1/2)) + (2^(1/2)*m*w*x*psi0(x))/(2*(hp*m*w)^(1/2))
+pretty(eq13)
 
 % 1/sqrt(2*hp*m*w)*(i*p+m*w*x)psi0=0 =>
 % dpsi0/dx=-m*w/hp*x*psi0
-syms psi0(x)
 eq2=diff(psi0,x)+m*w/(hp)*x*psi0
 psi0sol=dsolve(eq2)
 % C13*exp(-(m*w*x^2)/(2*hp))
@@ -63,6 +75,16 @@ psi0=subs(psi0,A,A1)
 % Subst (2.32) to (2.30) and use a_minus(psi0)=0, then
 % E0=1/2*hp*w
 % psi(x,n)=A(n)*(a_plus)^n*psi0(x), E(n)=(n+1/2)*hp*w
+syms A1
+syms psi0(x)
+psi1=A1*OpAp(psi0)
+
+syms psin(x)
+ApAm=OpAp(OpAm(psin))
+% (m*w*x^2*psin(x))/(2*hp) - (hp*diff(psin(x), x, x))/(2*m*w) - psin(x)/2
+AmAp=OpAm(OpAp(psin))
+% psin(x)/2 - (hp*diff(psin(x), x, x))/(2*m*w) + (m*w*x^2*psin(x))/(2*hp)
+
 % a_plus(psi(n))=sqrt(n^2+1)*psi(n+1)
 % a_minus(psi(n))=sqrt(n)*psi(n-1)
 % then A(n)=1/sqrt(n!).
@@ -81,3 +103,30 @@ psi0=subs(psi0,A,A1)
 % psi(alfa)=exp(-|alfa|^2/2)*sum(n=0:inf)(alfa^n/sqrt(n!))psi(n)   (2.34)
 % where you can find the probability of the oscillator being in the nth state
 % P(n)=exp(-|alfa|^2)*|alfa|^(2*n)/n!
+
+function Am=OpAm(psi)
+syms hp m w p x real
+Am=1/sqrt(2*hp*m*w)*(i*OpPx(psi)+m*w*OpX(psi));
+Am=expand(Am);
+end
+
+function Ap=OpAp(psi)
+syms hp m w p x real
+Ap=1/sqrt(2*hp*m*w)*(-i*OpPx(psi)+m*w*OpX(psi));
+Ap=expand(Ap);
+end
+
+function Px=OpPx(psi)
+syms hp x real
+Px=-1i*hp*diff(psi,x);
+end
+
+function X=OpX(psi)
+syms x real
+X=x*psi;
+end
+
+function H=OpH(psi)
+syms m w hp real
+H=1/(2*m)*(OpPx(OpPx(psi))+(m*w)^2*OpX(OpX(psi)));
+end
