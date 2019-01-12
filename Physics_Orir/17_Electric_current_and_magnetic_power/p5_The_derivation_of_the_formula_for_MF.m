@@ -10,5 +10,12 @@ F1=q*(2*k0*lam1/y)
 pretty(F1)
 F=sqrt(1-v^2/c^2)*F1
 % F=(2*I*k0*q*v)/(c^2*y)                     (17-12)
+
 k0=1e-7*3e8^2
 % 9e+09
+
+syms I k0 q v c y
+F=(2*I*k0*q*v)/(c^2*y)
+syms A N m C s
+F_si=subs(F,[I k0 q v c y],[A N*m^2/C^2 C m/s m/s m])
+% (2*A*N*s)/C~C/s*(N*s/C)~N

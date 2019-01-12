@@ -1,7 +1,14 @@
 % Ohm's law
 
 % Determination of resistance
-% R=V/I 
+% R=V/I
+clear
+syms V I
+R=V/I
+
+syms A
+R_si=subs(R,[V I],[V A])
+% V/A~Om
 
 % Conclusion of Ohm's Law
 
@@ -37,6 +44,11 @@ R=V/I
 % R=ro*x0/A
 % where
 % ro is resistivity
+R=(2*m*u*x0)/(A*L*e^2*n)
+
+syms kg m s C
+R_si=subs(R,[m u x0 A L e n],[kg m/s m m^2 m C 1/m^3])
+% (2*kg*m^2)/(C^2*s)~(kg*m^2)/(C^2*s)~Om
 
 % Joule heat loss
 % dEh=V*dq   |:dt
@@ -44,6 +56,12 @@ R=V/I
 % Electric power loss or Joule loss
 % P=V*I                     (17-6)
 % P=I^2*R or P=V^2/R
+syms I R
+P=I^2*R
+
+syms A Om
+P_si=subs(P,[I R],[A Om])
+% A^2*Om~W
 
 % Electromotive force
 % Emf=dW/dq
