@@ -13,7 +13,7 @@ B=2*k0*I/(c^2*r)
 % int_c(All cont)=int_c(Curcle)B*ds=4*pi*(k0/c^2)*I
 % int_c(C)B*ds=(4*pi*k0/c^2)*I    Ampere's Law   (18-1)
 
-% int_c(C)B*ds=(4*pi*k0/c^2)*int()j*dA
+% int_c(C)B*ds=(4*pi*k0/c^2)*int()j*dA           (18-2)
 % where
 % j -  current density
 
@@ -22,3 +22,5 @@ B=2*k0*I/(c^2*r)
 % Magnetic flux
 % PhiE=int(S)E*dA
 % PhiB=int_c(S)B*dA
+
+% int_c()B*dA=0                     (18-3)
