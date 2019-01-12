@@ -10,3 +10,7 @@ syms I n e A
 vd=I/(n*e*A)
 vd1=vpa(subs(vd,[I n e A],[1 n1 1.6e-19 1e-6]))
 % 7.42e-5 m/s = 0.074 mm/s
+
+syms A m C
+vd_si=subs(vd,[I n e A],[A 1/m^3 C m^2])
+% (A*m)/C~C/s*m/C~m/s
