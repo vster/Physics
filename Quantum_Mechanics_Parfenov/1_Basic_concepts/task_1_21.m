@@ -5,6 +5,13 @@ sw1=simplify(OperF(OperPx(g))-OperPx(OperF(g)))
 % hp*g(x)*diff(f(x), x)*1i
 sk1=sw1/g(x)
 % hp*diff(f(x), x)*1i
+c1=Commutator(@OperF,@OperPx,g)
+% hp*g(x)*diff(f(x), x)*1i
+
+% Commutator
+function c=Commutator(f1,f2,psi)
+c=simplify(f1(f2(psi))-f2(f1(psi)));
+end
 
 % Impulse operator
 function P=OperPx(psi)
