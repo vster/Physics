@@ -2,30 +2,45 @@ syms x hp real
 syms Psi(x)
 
 % a) [x^2,px]
-Sw1=simplify(OperX2(OperP(Psi))-OperP(OperX2(Psi)))
+S1=simplify(OperX2(OperP(Psi))-OperP(OperX2(Psi)))
+% hp*x*Psi(x)*2i
+S12=Switch(@OperX2,@OperP,Psi)
 % hp*x*Psi(x)*2i
 
 % b) [x,px2]
-Sw2=simplify(OperX(OperP2(Psi))-OperP2(OperX(Psi)))
+S2=simplify(OperX(OperP2(Psi))-OperP2(OperX(Psi)))
 % 2*hp^2*diff(Psi(x), x)
 pp=2*i*hp*OperP(Psi)
+% 2*hp^2*diff(Psi(x), x)
+S22=Switch(@OperX,@OperP2,Psi)
 % 2*hp^2*diff(Psi(x), x)
 
 % c) [d/dx,d/dy]
 syms x y
 syms Psi(x,y)
-Sw3=simplify(OperDx(OperDy(Psi))-OperDy(OperDx(Psi)))
+S3=simplify(OperDx(OperDy(Psi))-OperDy(OperDx(Psi)))
+% 0
+S31=Switch(@OperDx,@OperDy,Psi)
 % 0
 
 % d)[d2/dx2,x^2]
 syms x
 syms Psi(x)
-Sw4=simplify(OperD2x(OperX2(Psi))-OperX2(OperD2x(Psi)))
+S4=simplify(OperD2x(OperX2(Psi))-OperX2(OperD2x(Psi)))
+% 2*Psi(x) + 4*x*diff(Psi(x), x)
+S41=Switch(@OperD2x,@OperX2,Psi)
 % 2*Psi(x) + 4*x*diff(Psi(x), x)
 
 % e)[d2/dx2,x3]
-Sw5=simplify(OperD2x(OperX3(Psi))-OperX3(OperD2x(Psi)))
+S5=simplify(OperD2x(OperX3(Psi))-OperX3(OperD2x(Psi)))
 % 6*x*Psi(x) + 6*x^2*diff(Psi(x), x)
+S51=Switch(@OperD2x,@OperX3,Psi)
+% 6*x*Psi(x) + 6*x^2*diff(Psi(x), x)
+
+% Switch
+function s=Switch(f1,f2,f)
+s=simplify(f1(f2(f))-f2(f1(f)));
+end
 
 % Coordinate X operator
 function X=OperX(psi)
