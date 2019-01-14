@@ -2,14 +2,14 @@ clear
 syms x real
 syms Psi(x)
 
-S1=simplify(OperX(OperPx(Psi))-OperPx(OperX(Psi)))
+C1=simplify(OperX(OperPx(Psi))-OperPx(OperX(Psi)))
 % hp*Psi(x)*1i
-S2=Sw(@OperX,@OperPx,Psi)
+C2=Commutator(@OperX,@OperPx,Psi)
 % hp*Psi(x)*1i
 
-% Switch
-function s=Sw(f1,f2,f)
-s=simplify(f1(f2(f))-f2(f1(f)));
+% Commutator
+function c=Commutator(f1,f2,f)
+c=simplify(f1(f2(f))-f2(f1(f)));
 end
 
 % Coordinate operator
