@@ -10,8 +10,9 @@ col_psi_s=psi(:,s)
 T=zeros(n,n)
 for s=1:n
     col_e_s=e(:,s)
+    row_e_s=col_e_s'
     col_psi_s=psi(:,s)
-    T=T+col_psi_s*col_e_s'
+    T=T+col_psi_s*row_e_s
 end
 % T=
 %[ psi1_1, psi1_2, psi1_3]
