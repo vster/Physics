@@ -1,3 +1,4 @@
+clear
 syms teta phi
 sig1=[0 1;1 0]    % - Rotate the polarization plane -45 grad
 sig2=[0 -i;i 0]   % - Phase shift -45 grad
@@ -5,7 +6,6 @@ sig3=[1 0;0 -1]
 
 ket_psi=[cos(teta/2)*exp(-i*phi/2);...
          sin(teta/2)*exp(i*phi/2)]                   % (24)
-
      
 ket_psi1=subs(ket_psi,[teta,phi],[0,0]) 
 % 1             - lin horiz
@@ -20,7 +20,6 @@ ket_psi1=subs(ket_psi,[teta,phi],[pi,0])
 sig1*ket_psi1
 sig2*ket_psi1
 sig3*ket_psi1
-
 
 ket_psi1=subs(ket_psi,[teta,phi],[pi/2,0])
 % 2^(1/2)/2      1   - lin 45 grad
@@ -50,12 +49,9 @@ sig1*ket_psi1
 sig2*ket_psi1
 sig3*ket_psi1
 
-
-
 % sx=<psi|sigx|psi>=sin(teta)*cos(phi)           (25)
 % sy=<psi|sigy|psi>=sin(teta)*sin(phi)           (26) 
 % sz=<psi|sigz|psi>=cos(teta)                    (27)
-
 
 sx=sin(teta)*cos(phi)
 sy=sin(teta)*sin(phi)
