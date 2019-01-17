@@ -1,6 +1,7 @@
 % Phase shift
 % Added plate lamda/4
 clear
+format short
 syms c1 c2
 ket_psi=[c1;c2]
 W=[i 0;0 1]
