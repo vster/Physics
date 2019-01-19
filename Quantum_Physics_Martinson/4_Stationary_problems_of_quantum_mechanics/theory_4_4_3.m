@@ -62,4 +62,11 @@ pretty(alfa)
 a=subs(a,[k1 k2],[k11 k21])
 pretty(a)
 
+% ...
+k2max=1/hp*sqrt(2*m0*U0)
+
+% In case k2max<pi/a, 
+% i.e. at U0<pi^2*hp^2/(2*m0*a^2) 
+% only one energy level remains in the pit
+
 
