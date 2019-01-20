@@ -1,4 +1,5 @@
-syms F L1 L2 alfa B
+clear
+syms F L1 L2 alfa A B I
 T=F*(L2*sin(alfa))
 F1=I*L1*B
 T=subs(T,F,F1)
