@@ -7,7 +7,7 @@ B=(2*I*k0)/(c^2*y)
 
 syms A N m C s
 B_si=subs(B,[I k0 c y],[A N*m^2/C^2 m/s m])
-% (2*A*N*s^2)/(C^2*m)~(A*N*s^2)/(A^2*s^2*m)~N/(A*s)~T
+% (2*A*N*s^2)/(C^2*m)~(A*N*s^2)/(A^2*s^2*m)~N/(A*m)~T
 
 % B1=k0/c^2*2*(lam1*v)/y
 % B1=(1/c^2)*v*E1

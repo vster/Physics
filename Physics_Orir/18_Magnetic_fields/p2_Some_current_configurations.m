@@ -16,11 +16,18 @@ B=(2*pi*k0/c^2)*I/r  % for r>R
 syms R r
 B=(2*k0/c^2)*(I/R^2)*r
 
+syms N m C s A
+B_si=subs(B,[k0 c I R r],[N*m^2/C^2 m/s A m m])
+% (2*A*N*s^2)/(C^2*m)~N/(A*m)~T
+
 % B=cross(v,E)/c^2
 % E=2*pi*k0*ro*r
 % B=v/c^2*(2*pi*k0*ro*r)=(2*pi*k0/c^2)*(ro*v)*r
 syms ro v
 B=(2*pi*k0/c^2)*(ro*v)*r
+
+B_si=subs(B,[k0 c ro v r],[N*m^2/C^2 m/s C/m^3 m/s m])
+% (2*pi*N*s)/(C*m)~N/(A*m)~T
 
 % Flat currents
 % If=sigma*v  
@@ -29,6 +36,8 @@ B=(2*pi*k0/c^2)*(ro*v)*r
 syms If
 B=(2*pi*k0/c^2)*If
 
+B_si=subs(B,[k0 c If],[N*m^2/C^2 m/s A/m])
+% (2*pi*A*N*s^2)/(C^2*m)~(N)/(A*m)~T
 
 % Solenoid
 % B=1/c^2*cross(v,E)
@@ -46,4 +55,6 @@ B=(2*pi*k0/c^2)*If
 syms N I L
 B=(4*pi*k0/c^2)*(N*I)/L
 
+B_si=subs(B,[k0 c N I L],[N*m^2/C^2 m/s 1 A m])
+% (4*pi*A*N*s^2)/(C^2*m)~(N)/(A*m)~T
 

@@ -3,6 +3,10 @@
 syms k0 I c r
 B=2*k0*I/(c^2*r)
 
+syms N m C A s
+B_si=subs(B,[k0 I c r],[N*m^2/C^2 A m/s m])
+% (2*A*N*s^2)/(C^2*m)~N/(A*m)~T
+
 % int_c()B*dS
 % int_c()B*dS=int_c()B*ds=(2*k0*I/(c^2*r))(2*pi*R)=(4*pi*k0/c^2)*I
 % int_c(curcle)B*dS=int_c(All contour)B*dS
