@@ -1,17 +1,22 @@
 % BB84
 clear
-% format short
-% digits(2)
+format short
+digits(2)
 
 % Sender A
-size=500
+size=300;
 DataA=randi([0 1],1,size);
+disp(DataA(1:10))
 BasisA=randi([0 1],1,size);
-PsiQC=vpa(SndA(DataA,BasisA));
+PsiQC=vpa(Snd(DataA,BasisA));
+
+% Intruder E
+[PsiQC,DataE]=Intruder(PsiQC);
 
 % Reciever B
 BasisB=randi([0 1],1,size);
-DataB=vpa(RcvB(PsiQC,BasisB));
+DataB=Rcv(PsiQC,BasisB);
+disp(DataB(1:10))
 
 EqBas=0;
 good=0;
@@ -28,44 +33,56 @@ for j=1:size
 end
 ber=err/EqBas
 
-function PsiA=SndA(DataA,BasisA)
-size=length(BasisA);
+function Psi=Snd(Data,Basis)
+size=length(Basis);
 ket_H=[1;0];
 ket_V=[0;1];
 ket_R=[2^(1/2)/2;2^(1/2)/2];
 ket_L=[-2^(1/2)/2;2^(1/2)/2];
 
-PsiA=zeros(2,size);
+Psi=zeros(2,size);
 for j=1:size
-    if BasisA(j)==0
-        if DataA(j)==0
-            PsiA(:,j)=ket_H;
+    if Basis(j)==0
+        if Data(j)==0
+            Psi(:,j)=ket_H;
         else
-            PsiA(:,j)=ket_V;
+            Psi(:,j)=ket_V;
         end
     else
-        if DataA(j)==0
-            PsiA(:,j)=ket_R;
+        if Data(j)==0
+            Psi(:,j)=ket_R;
         else
-            PsiA(:,j)=ket_L;
+            Psi(:,j)=ket_L;
         end
     end
 end
-% PsiA
+% Psi
 end
 
-function DataB=RcvB(Psi,BasisB)
-size=length(BasisB);
-DataB=zeros(1,size);
+function Data=Rcv(Psi,Basis)
+size=length(Basis);
+Data=zeros(1,size);
 for j=1:size
-    if BasisB(j)==0
+    if Basis(j)==0
         [Pr1,Pr2]=PrHV(Psi(:,j));
     else
         [Pr1,Pr2]=PrRL(Psi(:,j));
     end
-DataB(j)=Pr2;    
+    if 0.4<=Pr2&&Pr2<=0.6
+        Data(j)= randi([0 1],1,1);
+    else
+        Data(j)=round(Pr2);
+    end
 end
-% DataB
+% Data
+end
+
+function [Psi,DataE]=Intruder(Psi,BasisE)
+size=length(Psi(1,:));
+BasisE=randi([0 1],1,size);
+DataE=Rcv(Psi,BasisE);
+disp(DataE(1:10));
+Psi=Snd(DataE,BasisE);
 end
 
 function [PrH,PrV]=PrHV(psi)
