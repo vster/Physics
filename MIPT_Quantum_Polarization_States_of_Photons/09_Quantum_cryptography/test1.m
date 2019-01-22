@@ -2,11 +2,11 @@ clear
 format short
 ket_H=[1;0]
 ket_V=[0;1]
-ket_45=[2^(1/2)/2;2^(1/2)/2]
-ket_135=[-(2^(1/2)*1i)/2;(2^(1/2)*1i)/2]
+ket_R=[2^(1/2)/2;2^(1/2)/2]
+ket_L=[-(2^(1/2))/2;(2^(1/2))/2]
 
-sig1=[0 1;1 0]    % - Rotate the polarization plane -45 grad
-sig2=[0 -i;i 0]   % - Phase shift -45 grad
+sig1=[0 1;1 0]    
+sig2=[0 -i;i 0]   
 sig3=[1 0;0 -1]
 
 UM45=1/sqrt(2)*[1 1;-1 1]
@@ -30,30 +30,30 @@ for j=1:3
 end
 sig_V
 
-sig_45=zeros(2,4);
-sig_45(:,1)=ket_45;
+sig_R=zeros(2,4);
+sig_R(:,1)=ket_R;
 for j=1:3
-    sig_45(:,j+1)=sigma(:,:,j)*ket_45;
+    sig_R(:,j+1)=sigma(:,:,j)*ket_R;
 end
-sig_45
+sig_R
 
-sig_135=zeros(2,4);
-sig_135(:,1)=ket_135;
+sig_L=zeros(2,4);
+sig_L(:,1)=ket_L;
 for j=1:3
-    sig_135(:,j+1)=sigma(:,:,j)*ket_135;
+    sig_L(:,j+1)=sigma(:,:,j)*ket_L;
 end
-sig_135
+sig_L
 
 UM45_mat=zeros(2,4);
 UM45_mat(:,1)=UM45*ket_H;
 UM45_mat(:,2)=UM45*ket_V;
-UM45_mat(:,3)=UM45*ket_45;
-UM45_mat(:,4)=UM45*ket_135;
+UM45_mat(:,3)=UM45*ket_R;
+UM45_mat(:,4)=UM45*ket_L;
 UM45_mat
 
 UP45_mat=zeros(2,4);
 UP45_mat(:,1)=UP45*ket_H;
 UP45_mat(:,2)=UP45*ket_V;
-UP45_mat(:,3)=UP45*ket_45;
-UP45_mat(:,4)=UP45*ket_135;
+UP45_mat(:,3)=UP45*ket_R;
+UP45_mat(:,4)=UP45*ket_L;
 UP45_mat
