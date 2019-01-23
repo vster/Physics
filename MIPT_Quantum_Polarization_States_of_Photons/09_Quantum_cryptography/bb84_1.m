@@ -4,9 +4,9 @@ format short
 digits(2)
 
 % Sender A
-size=300;
+size=500;
 DataA=randi([0 1],1,size);
-disp(DataA(1:10))
+disp(DataA(1:15))
 BasisA=randi([0 1],1,size);
 PsiQC=vpa(Snd(DataA,BasisA));
 
@@ -16,7 +16,7 @@ PsiQC=vpa(Snd(DataA,BasisA));
 % Reciever B
 BasisB=randi([0 1],1,size);
 DataB=Rcv(PsiQC,BasisB);
-disp(DataB(1:10))
+disp(DataB(1:15))
 
 EqBas=0;
 good=0;
@@ -34,7 +34,7 @@ end
 ber=err/EqBas
 
 function Psi=Snd(Data,Basis)
-size=length(Basis);
+size=length(Data);
 ket_H=[1;0];
 ket_V=[0;1];
 ket_R=[2^(1/2)/2;2^(1/2)/2];
@@ -60,7 +60,7 @@ end
 end
 
 function Data=Rcv(Psi,Basis)
-size=length(Basis);
+size=length(Psi(1,:));
 Data=zeros(1,size);
 for j=1:size
     if Basis(j)==0
@@ -81,7 +81,7 @@ function [Psi,DataE]=Intruder(Psi,BasisE)
 size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
 DataE=Rcv(Psi,BasisE);
-disp(DataE(1:10));
+disp(DataE(1:15));
 Psi=Snd(DataE,BasisE);
 end
 
