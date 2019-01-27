@@ -37,8 +37,8 @@ function Psi=Snd(Data,Basis)
 size=length(Data);
 ket_H=[1;0];
 ket_V=[0;1];
-ket_R=[2^(1/2)/2;2^(1/2)/2];
-ket_L=[-2^(1/2)/2;2^(1/2)/2];
+ket_RD=[2^(1/2)/2;2^(1/2)/2];
+ket_LD=[-2^(1/2)/2;2^(1/2)/2];
 
 Psi=zeros(2,size);
 for j=1:size
@@ -50,9 +50,9 @@ for j=1:size
         end
     else
         if Data(j)==0
-            Psi(:,j)=ket_R;
+            Psi(:,j)=ket_RD;
         else
-            Psi(:,j)=ket_L;
+            Psi(:,j)=ket_LD;
         end
     end
 end
@@ -92,9 +92,9 @@ PrH=psi'*OpH*psi;
 PrV=psi'*OpV*psi;
 end
 
-function [PrR,PrL]=PrRL(psi)
-OpR=[0.5 0.5;0.5 0.5];
-OpL=[0.5 -0.5;-0.5 0.5];
-PrR=psi'*OpR*psi;
-PrL=psi'*OpL*psi;
+function [PrRD,PrLD]=PrRL(psi)
+OpRD=[0.5 0.5;0.5 0.5];
+OpLD=[0.5 -0.5;-0.5 0.5];
+PrRD=psi'*OpRD*psi;
+PrLD=psi'*OpLD*psi;
 end
