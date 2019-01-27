@@ -69,3 +69,32 @@ eq9=symsum((a(k+1)*((k+l+2)*(k+l+1)-l*(l+1))+...
 % a(k+1)~2*alfa*a(k)/k
 % sum(k=0:inf)(2*alfa)^k*ro^k/k!=exp(2*alfa*ro)
 % u(ro)~ro^(l+1)*exp(2*alfa*ro)
+
+% From (5.32) follows
+% 2*alfa*(nr+l+1)=2                                          (5.33)
+% From (5.33) -> alfa*n=1 or eps=1/n^2
+% En=Z^2*m0*e^4/(32*pi^2*eps0^2*hp^2)*1/n^2,  n=1,2,...      (5.34)
+
+% And so
+% Xnl(ro)=ro^l*exp(-ro/n)*sum(k=0:nr)a(k)*ro^k               (5.35)
+% where
+% ro=Z*r/a
+% nr=n-(l+1), and l<=n-1
+% a(k) defined as in (5.32)
+
+% Value of a0 choosed from condition of normalization
+% int(0:inf)int(0:pi)int(0:2*pi)
+%       |psi(r,teta,phi)|^2*r^2*sin(teta)*dro*dteta*dphi=1   (5.36)
+
+% And so
+% psi_nlm(ro,teta,phi)=X_nl(ro)*Y_lm(teta,phi)
+
+% The following symbols are used to denote quantum states 
+% with a given value of the orbital quantum number l:
+% Value         0 1 2 3 4 5
+% State symbol  s p d f g h
+
+% n=1 -> 1s
+% n=2 -> 2s, 2p
+% n=3 -> 3s, 3p, 3d
+% n=4 -> 4s, 4p 4d, 4f etc
