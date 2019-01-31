@@ -33,7 +33,9 @@ H*ket_psi
 % [ g + h,     0]
 % [     0, h - g]
 
+% |Psi+>
 ket_Psip=1/sqrt(2)*[1;1]
+% |Psi->
 ket_Psim=1/sqrt(2)*[1;-1]
 
 ket_Psi0=[1;0]
@@ -45,6 +47,9 @@ E1=h+g
 E2=h-g
 ket_Psi(t)=1/sqrt(2)*(exp(-i*E1*t/hp)*ket_Psip+...
             exp(-i*E2*t/hp)*ket_Psim)
-ket_Psi(t)=simplify(ket_Psi_t)
+ket_Psi(t)=simplify(ket_Psi(t))
+%    exp((t*(g*1i - h*1i))/hp)/2 + exp(-(t*(g*1i + h*1i))/hp)/2
+%  - exp((t*(g*1i - h*1i))/hp)/2 + exp(-(t*(g*1i + h*1i))/hp)/2
+ket_Psi(t)=exp(-i*h*t/hp)*[cos(g*t/hp);-i*sin(g*t/hp)]
 %      exp(-(h*t*1i)/hp)*cos((g*t)/hp)
 %  -exp(-(h*t*1i)/hp)*sin((g*t)/hp)*1i
