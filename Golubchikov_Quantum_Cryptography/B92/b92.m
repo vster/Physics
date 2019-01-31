@@ -4,13 +4,13 @@ format short
 digits(2)
 
 % Sender A
-size=100;
+size=200;
 DataA=randi([0 1],1,size);
 disp(DataA(1:15))
 PsiQC=vpa(Snd(DataA));
 
 % Intruder E
-% [PsiQC,DataE]=Intruder(PsiQC);
+[PsiQC,DataE]=Intruder(PsiQC);
 
 % Reciever B
 BasisB=randi([0 1],1,size);
@@ -57,12 +57,11 @@ for j=1:size
     else
         Pr(j)=psi'*Op1D*psi;
     end   
-    Data(j)=round(1-Pr(j));
-    if Pr(j)==0.5
-        Data(j)=randi([0 1],1,1);
-    end
+    Data(j)=1-Pr(j);
+    %if Pr(j)==0.5
+    %    Data(j)=randi([0 1],1,1);
+    %end
 end
-% Data
 end
 
 function [Psi,DataE]=Intruder(Psi,BasisE)
@@ -70,6 +69,11 @@ size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
 DataE=Rcv(Psi,BasisE);
 disp(DataE(1:15));
-Psi=Snd(DataE,BasisE);
+for j=1:size
+    if DataE(j)==0.5
+        DataE(j)=randi([0 1],1,1);
+    end
+end
+Psi=Snd(DataE);
 end
 
