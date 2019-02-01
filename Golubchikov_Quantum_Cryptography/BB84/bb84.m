@@ -11,8 +11,8 @@ BasisA=randi([0 1],1,size);
 PsiQC=vpa(Snd(DataA,BasisA));
 
 % Intruder E
-intr_exist=1;
-while intr_exist>0 
+intr_exist=0;
+if intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
 GuessE=0;
 for n=1:size
@@ -21,13 +21,12 @@ for n=1:size
     end
 end
 GuessE_size=GuessE/size
-intr_exist=0;
 end
 
 % DarkNoise
-dn_exist=0;
+dn_exist=1;
 if dn_exist>0
-dnp=0.2       % probability of dark noise bits
+dnp=0.1;       % probability of dark noise bits
 darknoise=randbin(dnp,size);
 psi00=[0;0];
 for n=1:size
@@ -35,23 +34,19 @@ for n=1:size
         PsiQC(:,n)=psi00;
     end
 end
-dn_exist=0;
 end
 
 % Reciever B
 BasisB=randi([0 1],1,size);
-DataB=Rcv(PsiQC,BasisB);
+[DataB,ErrBinB]=Rcv(PsiQC,BasisB);
 disp(DataB(1:15))
 
 EqBas=0;
-good=0;
 err=0;
 for n=1:size
     if BasisA(n)==BasisB(n)
         EqBas=EqBas+1;
-        if DataA(n)==DataB(n)
-            good=good+1;
-        else
+        if DataA(n)~=DataB(n) || ErrBinB(n)==1
             err=err+1;
         end
     end
@@ -85,10 +80,17 @@ end
 % Psi
 end
 
-function Data=Rcv(Psi,Basis)
+function [Data,ErrBin]=Rcv(Psi,Basis)
 size=length(Psi(1,:));
 Data=zeros(1,size);
+ErrBin=zeros(1,size);
 for n=1:size
+    ket_psi=Psi(:,n);
+    A=ket_psi'*ket_psi;
+    if A==0
+        ErrBin(n)=1;
+        continue;
+    end
     if Basis(n)==0
         [Pr1,Pr2]=PrP(Psi(:,n));
     else
@@ -108,7 +110,7 @@ size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
 % BasisE=zeros(1,size);
 % BasisE=ones(1,size);
-DataE=Rcv(Psi,BasisE);
+[DataE,ErrBinE]=Rcv(Psi,BasisE);
 disp(DataE(1:15));
 Psi=Snd(DataE,BasisE);
 end
@@ -128,5 +130,5 @@ Pr1D=psi'*Op1D*psi;
 end
 
 function rb=randbin(p,size)
-    rb=floor(randi([0 ceil(1/p)],[1,size])*p);
+    rb=floor(rand([1,size])+p);
 end
