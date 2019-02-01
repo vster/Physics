@@ -4,14 +4,39 @@ format short
 digits(2)
 
 % Sender A
-size=100;
+size=500;
 DataA=randi([0 1],1,size);
 disp(DataA(1:15))
 BasisA=randi([0 1],1,size);
 PsiQC=vpa(Snd(DataA,BasisA));
 
 % Intruder E
+intr_exist=1;
+while intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
+GuessE=0;
+for n=1:size
+    if DataA(n)==DataE(n)
+        GuessE=GuessE+1;
+    end
+end
+GuessE_size=GuessE/size
+intr_exist=0;
+end
+
+% DarkNoise
+dn_exist=0;
+if dn_exist>0
+dnp=0.2       % probability of dark noise bits
+darknoise=randbin(dnp,size);
+psi00=[0;0];
+for n=1:size
+    if darknoise(n)==1
+        PsiQC(:,n)=psi00;
+    end
+end
+dn_exist=0;
+end
 
 % Reciever B
 BasisB=randi([0 1],1,size);
@@ -21,17 +46,18 @@ disp(DataB(1:15))
 EqBas=0;
 good=0;
 err=0;
-for j=1:size
-    if BasisA(j)==BasisB(j)
+for n=1:size
+    if BasisA(n)==BasisB(n)
         EqBas=EqBas+1;
-        if DataA(j)==DataB(j)
+        if DataA(n)==DataB(n)
             good=good+1;
         else
             err=err+1;
         end
     end
 end
-ber=err/EqBas
+ber_eq=err/EqBas
+ber_size=err/size
 
 function Psi=Snd(Data,Basis)
 size=length(Data);
@@ -41,18 +67,18 @@ ket0D=1/sqrt(2)*(ket0P+ket1P);
 ket1D=1/sqrt(2)*(ket0P-ket1P);
 
 Psi=zeros(2,size);
-for j=1:size
-    if Basis(j)==0
-        if Data(j)==0
-            Psi(:,j)=ket0P;
+for n=1:size
+    if Basis(n)==0
+        if Data(n)==0
+            Psi(:,n)=ket0P;
         else
-            Psi(:,j)=ket1P;
+            Psi(:,n)=ket1P;
         end
     else
-        if Data(j)==0
-            Psi(:,j)=ket0D;
+        if Data(n)==0
+            Psi(:,n)=ket0D;
         else
-            Psi(:,j)=ket1D;
+            Psi(:,n)=ket1D;
         end
     end
 end
@@ -62,16 +88,16 @@ end
 function Data=Rcv(Psi,Basis)
 size=length(Psi(1,:));
 Data=zeros(1,size);
-for j=1:size
-    if Basis(j)==0
-        [Pr1,Pr2]=PrP(Psi(:,j));
+for n=1:size
+    if Basis(n)==0
+        [Pr1,Pr2]=PrP(Psi(:,n));
     else
-        [Pr1,Pr2]=PrD(Psi(:,j));
-    end
-    if 0.4<=Pr2&&Pr2<=0.6
-        Data(j)= randi([0 1],1,1);
+        [Pr1,Pr2]=PrD(Psi(:,n));
+    end    
+    if Pr2>0.4 && Pr2<0.6
+        Data(n)= randi([0 1],1,1);    
     else
-        Data(j)=round(Pr2);
+        Data(n)=round(Pr2);
     end
 end
 % Data
@@ -80,6 +106,8 @@ end
 function [Psi,DataE]=Intruder(Psi,BasisE)
 size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
+% BasisE=zeros(1,size);
+% BasisE=ones(1,size);
 DataE=Rcv(Psi,BasisE);
 disp(DataE(1:15));
 Psi=Snd(DataE,BasisE);
@@ -97,4 +125,8 @@ Op0D=[0.5 0.5;0.5 0.5];
 Op1D=[0.5 -0.5;-0.5 0.5];
 Pr0D=psi'*Op0D*psi;
 Pr1D=psi'*Op1D*psi;
+end
+
+function rb=randbin(p,size)
+    rb=floor(randi([0 ceil(1/p)],[1,size])*p);
 end
