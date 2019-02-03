@@ -1,6 +1,6 @@
-% f=1000 MHz
-% R=100 ly = 9.46e17 m
-% D=3 km = 3e3 m
+% f = 1000 MHz
+% R = 100 ly = 9.46e17 m
+% D = 3 km = 3e3 m
 clear
 syms D R
 teta=D/R

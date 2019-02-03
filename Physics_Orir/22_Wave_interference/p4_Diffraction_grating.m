@@ -19,19 +19,19 @@ I1=N^2*I0
 
 % Resolution
 
-% N*d_phi0/2=pi
+% N*D_phi0/2=pi
 % or
-% d_phi0=2*pi/N
+%D_phi0=2*pi/N
 syms k d teta0
 phi0(teta0)=k*d*sin(teta0)
-d_phi0=diff(phi0,teta0)
+D_phi0=diff(phi0,teta0)
 % d*k*cos(teta0)*d_teta0
-syms d_phi0
-d_teta0=d_phi0/(d*k*cos(teta0))
-d_teta0=2*pi/(N*d*k*cos(teta0))
+syms D_phi0
+D_teta0=D_phi0/(d*k*cos(teta0))
+D_teta0=2*pi/(N*d*k*cos(teta0))
 syms lam0
-d_teta0=lam0/(N*d*cos(teta0))             % (22-8)
+D_teta0=lam0/(N*d*cos(teta0))             % (22-8)
 
-% sin(teta)=lam/d => d_lam=d*cos(teta)*d_teta
+% sin(teta)=lam/d => D_lam=d*cos(teta)*D_teta
 % Use (22-8), then
-% d_lam0=lam0/N                             (22-9)
+% D_lam0=lam0/N                             (22-9)
