@@ -10,7 +10,7 @@ disp(DataA(1:10))
 PsiQC=vpa(Snd(DataA));
 
 % Intruder E
-% [PsiQC,DataE]=Intruder(PsiQC);
+[PsiQC,DataE]=Intruder(PsiQC);
 
 % Reciever B
 BasisB=randi([0 1],1,size);
