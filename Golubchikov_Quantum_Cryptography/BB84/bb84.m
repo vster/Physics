@@ -4,11 +4,18 @@ format short
 digits(2)
 
 % Sender A
-size=500;
+size=200;
 DataA=randi([0 1],1,size);
-disp(DataA(1:15))
+disp('Alice Data')
+disp(DataA(1:10))
+
 BasisA=randi([0 1],1,size);
+disp('Alice Basis')
+disp(BasisA(1:10))
+
 PsiQC=vpa(Snd(DataA,BasisA));
+disp('Photons in Channel')
+disp(PsiQC(:,1:10))
 
 % Intruder E
 intr_exist=0;
@@ -24,9 +31,9 @@ GuessE_size=GuessE/size
 end
 
 % DarkNoise
-dn_exist=0;
+dn_exist=1;
 if dn_exist>0
-dnp=0.1;       % probability of dark noise bits
+dnp=0.3;       % probability of dark noise bits
 darknoise=randbin(dnp,size);
 psi00=[0;0];
 for n=1:size
@@ -34,23 +41,38 @@ for n=1:size
         PsiQC(:,n)=psi00;
     end
 end
+disp('Photons in Channel with Dark Noise')
+disp(PsiQC(:,1:10))
 end
 
 % Reciever B
 BasisB=randi([0 1],1,size);
+% BasisB=zeros(1,size);
+% BasisB=ones(1,size);
+disp('Bob Basis')
+disp(BasisB(1:10))
 [DataB,ErrBinB]=Rcv(PsiQC,BasisB);
-disp(DataB(1:15))
+disp('Bob Data')
+disp(DataB(1:10))
+if dn_exist>0
+    disp('Error Bits in Channel')
+    disp(ErrBinB(1:10))
+end
 
 EqBas=0;
 err=0;
+EqBasVect=zeros(1,size);
 for n=1:size
     if BasisA(n)==BasisB(n)
+        EqBasVect(n)=1;
         EqBas=EqBas+1;
         if DataA(n)~=DataB(n) || ErrBinB(n)==1
             err=err+1;
         end
     end
 end
+disp('Matching of Alice and Bob Bases')
+disp(EqBasVect(1:10))
 ber_eq=err/EqBas
 ber_size=err/size
 
@@ -110,8 +132,11 @@ size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
 % BasisE=zeros(1,size);
 % BasisE=ones(1,size);
+disp('Eve Basis')
+disp(BasisE(1:10));
 [DataE,ErrBinE]=Rcv(Psi,BasisE);
-disp(DataE(1:15));
+disp('Eve Data')
+disp(DataE(1:10));
 Psi=Snd(DataE,BasisE);
 end
 
