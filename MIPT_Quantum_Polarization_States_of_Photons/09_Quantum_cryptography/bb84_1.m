@@ -88,13 +88,15 @@ end
 function [PrH,PrV]=PrHV(psi)
 OpH=[1 0;0 0];
 OpV=[0 0;0 1];
-PrH=psi'*OpH*psi;
-PrV=psi'*OpV*psi;
+ro=psi*psi';
+PrH=trace(OpH*ro);
+PrV=trace(OpV*ro);
 end
 
 function [PrRD,PrLD]=PrRL(psi)
 OpRD=[0.5 0.5;0.5 0.5];
 OpLD=[0.5 -0.5;-0.5 0.5];
-PrRD=psi'*OpRD*psi;
-PrLD=psi'*OpLD*psi;
+ro=psi*psi';
+PrRD=trace(OpRD*ro);
+PrLD=trace(OpLD*ro);
 end
