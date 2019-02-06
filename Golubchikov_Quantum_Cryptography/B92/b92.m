@@ -6,28 +6,32 @@ digits(2)
 % Sender A
 size=200;
 DataA=randi([0 1],1,size);
-disp(DataA(1:15))
+disp(DataA(1:10))
 PsiQC=vpa(Snd(DataA));
 
 % Intruder E
-[PsiQC,DataE]=Intruder(PsiQC);
+% [PsiQC,DataE]=Intruder(PsiQC);
 
 % Reciever B
 BasisB=randi([0 1],1,size);
+disp(BasisB(1:10))
 DataB=Rcv(PsiQC,BasisB);
-disp(DataB(1:15))
+disp(DataB(1:10))
 
 EqBas=0;
 good=0;
 err=0;
 for j=1:size
-    if DataA(j)==DataB(j)
-         good=good+1;
-    else
-         err=err+1;
-    end    
+    if DataA(j)==BasisB(j)
+      EqBas=EqBas+1;
+        if DataA(j)==DataB(j)
+             good=good+1;
+        else
+             err=err+1;
+        end    
+    end
 end
-ber=err/size
+ber=err/EqBas
 
 function Psi=Snd(Data)
 size=length(Data);
@@ -52,10 +56,11 @@ OpVP=[0 0;0 1];
 Op1D=[0.5 -0.5;-0.5 0.5];
 for j=1:size
     psi=Psi(:,j);
+    ro=psi*psi';
     if Basis(j)==0;
-        Pr(j)=psi'*OpVP*psi;
+        Pr(j)=trace(ro*OpVP);
     else
-        Pr(j)=psi'*Op1D*psi;
+        Pr(j)=trace(ro*Op1D);
     end   
     Data(j)=1-Pr(j);
     %if Pr(j)==0.5
@@ -68,7 +73,7 @@ function [Psi,DataE]=Intruder(Psi,BasisE)
 size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
 DataE=Rcv(Psi,BasisE);
-disp(DataE(1:15));
+disp(DataE(1:10));
 for j=1:size
     if DataE(j)==0.5
         DataE(j)=randi([0 1],1,1);

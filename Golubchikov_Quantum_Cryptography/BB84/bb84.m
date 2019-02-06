@@ -24,7 +24,7 @@ GuessE_size=GuessE/size
 end
 
 % DarkNoise
-dn_exist=1;
+dn_exist=0;
 if dn_exist>0
 dnp=0.1;       % probability of dark noise bits
 darknoise=randbin(dnp,size);
@@ -118,15 +118,17 @@ end
 function [Pr0P,Pr1P]=PrP(psi)
 Op0P=[1 0;0 0];
 Op1P=[0 0;0 1];
-Pr0P=psi'*Op0P*psi;
-Pr1P=psi'*Op1P*psi;
+ro=psi*psi';
+Pr0P=trace(ro*Op0P);
+Pr1P=trace(ro*Op1P);
 end
 
 function [Pr0D,Pr1D]=PrD(psi)
 Op0D=[0.5 0.5;0.5 0.5];
 Op1D=[0.5 -0.5;-0.5 0.5];
-Pr0D=psi'*Op0D*psi;
-Pr1D=psi'*Op1D*psi;
+ro=psi*psi';
+Pr0D=trace(ro*Op0D);
+Pr1D=trace(ro*Op1D);
 end
 
 function rb=randbin(p,size)
