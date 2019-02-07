@@ -4,7 +4,7 @@ format short
 digits(2)
 
 % Sender A
-size=200;
+size=500;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
 disp(DataA(1:10))
@@ -18,7 +18,7 @@ disp('Photons in Channel')
 disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
-intr_exist=0;
+intr_exist=1;
 if intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
 GuessE=0;
@@ -31,7 +31,7 @@ GuessE_size=GuessE/size
 end
 
 % DarkNoise
-dn_exist=1;
+dn_exist=0;
 if dn_exist>0
 dnp=0.1;       % probability of dark noise bits
 darknoise=randbin(dnp,size);
@@ -114,17 +114,16 @@ for n=1:size
         continue;
     end
     if Basis(n)==0
-        [Pr1,Pr2]=PrP(Psi(:,n));
+        Pr=PrP(Psi(:,n));
     else
-        [Pr1,Pr2]=PrD(Psi(:,n));
+        Pr=PrD(Psi(:,n));
     end    
-    if Pr2>0.4 && Pr2<0.6
+    if Pr==0.5
         Data(n)= randi([0 1],1,1);    
     else
-        Data(n)=round(Pr2);
+        Data(n)=round(Pr);
     end
 end
-% Data
 end
 
 function [Psi,DataE]=Intruder(Psi,BasisE)
@@ -140,19 +139,19 @@ disp(DataE(1:10));
 Psi=Snd(DataE,BasisE);
 end
 
-function [Pr0P,Pr1P]=PrP(psi)
+function Pr1P=PrP(psi)
 Op0P=[1 0;0 0];
 Op1P=[0 0;0 1];
 ro=psi*psi';
-Pr0P=trace(ro*Op0P);
+% Pr0P=trace(ro*Op0P);
 Pr1P=trace(ro*Op1P);
 end
 
-function [Pr0D,Pr1D]=PrD(psi)
+function Pr1D=PrD(psi)
 Op0D=[0.5 0.5;0.5 0.5];
 Op1D=[0.5 -0.5;-0.5 0.5];
 ro=psi*psi';
-Pr0D=trace(ro*Op0D);
+% Pr0D=trace(ro*Op0D);
 Pr1D=trace(ro*Op1D);
 end
 
