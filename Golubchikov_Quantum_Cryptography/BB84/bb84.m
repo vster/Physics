@@ -33,7 +33,7 @@ end
 % DarkNoise
 dn_exist=1;
 if dn_exist>0
-dnp=0.2;       % probability of dark noise bits
+dnp=0.1;       % probability of dark noise bits
 darknoise=randbin(dnp,size);
 psi00=[0;0];
 for n=1:size
@@ -42,7 +42,7 @@ for n=1:size
     end
 end
 disp('Photons in Channel with Dark Noise')
-disp(PsiQC(:,1:10))
+disp(vpa(PsiQC(:,1:10)))
 end
 
 % Reciever B
