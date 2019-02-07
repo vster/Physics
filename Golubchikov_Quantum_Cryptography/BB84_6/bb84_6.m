@@ -12,9 +12,9 @@ disp(DataA(1:10))
 BasisA=randi([0 2],1,size);
 disp('Alice Basis')
 disp(BasisA(1:10))
-PsiQC=vpa(Snd(DataA,BasisA));
+PsiQC=Snd(DataA,BasisA);
 disp('Photons in Channel')
-disp(PsiQC(:,1:10))
+disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
 intr_exist=0;
@@ -30,7 +30,7 @@ GuessE_size=GuessE/size
 end
 
 % DarkNoise
-dn_exist=1;
+dn_exist=0;
 if dn_exist>0
 dnp=0.1;       % probability of dark noise bits
 darknoise=randbin(dnp,size);

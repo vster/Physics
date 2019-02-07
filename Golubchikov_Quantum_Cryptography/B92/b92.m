@@ -8,9 +8,9 @@ size=200;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
 disp(DataA(1:10))
-PsiQC=vpa(Snd(DataA));
+PsiQC=Snd(DataA);
 disp('Photons in Channel')
-disp(PsiQC(:,1:10))
+disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
 intr_exist=1;

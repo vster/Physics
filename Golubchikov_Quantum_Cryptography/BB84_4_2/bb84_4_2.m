@@ -1,7 +1,11 @@
 % BB84
 clear
-format short
+format long
 digits(2)
+global eta ket0 ket1
+eta=2*pi/3
+ket0=[1;0];
+ket1=[0;1];
 
 % Sender A
 size=200;
@@ -15,7 +19,7 @@ disp(BasisA(1:10))
 
 PsiQC=Snd(DataA,BasisA);
 disp('Photons in Channel')
-disp(vpa(PsiQC(:,1:10)))
+disp(PsiQC(:,1:10))
 
 % Intruder E
 intr_exist=0;
@@ -31,9 +35,9 @@ GuessE_size=GuessE/size
 end
 
 % DarkNoise
-dn_exist=1;
+dn_exist=0;
 if dn_exist>0
-dnp=0.2;       % probability of dark noise bits
+dnp=0.3;       % probability of dark noise bits
 darknoise=randbin(dnp,size);
 psi00=[0;0];
 for n=1:size
@@ -77,35 +81,38 @@ ber_eq=err/EqBas
 ber_size=err/size
 
 function Psi=Snd(Data,Basis)
+global eta ket0 ket1
 size=length(Data);
-ket0P=[1;0];
-ket1P=[0;1];
-ket0D=1/sqrt(2)*(ket0P+ket1P);
-ket1D=1/sqrt(2)*(ket0P-ket1P);
+ket0x=cos(eta/2)*ket0+sin(eta/2)*ket1
+ket1x=cos(eta/2)*ket0-sin(eta/2)*ket1
+ket0y=cos(eta/2)*ket0+1i*sin(eta/2)*ket1
+ket1y=cos(eta/2)*ket0-1i*sin(eta/2)*ket1
 
 Psi=zeros(2,size);
 for n=1:size
     if Basis(n)==0
         if Data(n)==0
-            Psi(:,n)=ket0P;
+            Psi(:,n)=ket0x;
         else
-            Psi(:,n)=ket1P;
+            Psi(:,n)=ket1x;
         end
     else
         if Data(n)==0
-            Psi(:,n)=ket0D;
+            Psi(:,n)=ket0y;
         else
-            Psi(:,n)=ket1D;
+            Psi(:,n)=ket1y;
         end
     end
 end
-% Psi
 end
 
 function [Data,ErrBin]=Rcv(Psi,Basis)
 size=length(Psi(1,:));
 Data=zeros(1,size);
 ErrBin=zeros(1,size);
+ValidBin=zeros(1,size);
+
+MeasureBin=randi([0 1],1,size);
 for n=1:size
     ket_psi=Psi(:,n);
     A=ket_psi'*ket_psi;
@@ -113,15 +120,23 @@ for n=1:size
         ErrBin(n)=1;
         continue;
     end
+    ro=ket_psi*ket_psi'
     if Basis(n)==0
-        [Pr1,Pr2]=PrP(Psi(:,n));
+        if MeasureBin(n)==0
+            Pr=Pr0X(Psi(:,n)) 
+        else
+            Pr=Pr1X(Psi(:,n))
+        end
     else
-        [Pr1,Pr2]=PrD(Psi(:,n));
-    end    
-    if Pr2>0.4 && Pr2<0.6
-        Data(n)= randi([0 1],1,1);    
-    else
-        Data(n)=round(Pr2);
+        if MeasureBin(n)==0
+            Pr=Pr0Y(Psi(:,n)) 
+        else
+            Pr=Pr1Y(Psi(:,n))
+        end
+    end
+    if Pr==1
+        Data(n)=MeasureBin(n);
+        ValidBin(n)=1;
     end
 end
 % Data
@@ -140,20 +155,36 @@ disp(DataE(1:10));
 Psi=Snd(DataE,BasisE);
 end
 
-function [Pr0P,Pr1P]=PrP(psi)
-Op0P=[1 0;0 0];
-Op1P=[0 0;0 1];
+function Pr=Pr0X(psi)
+global eta ket0 ket1
+ket0x=cos(eta/2)*ket0+sin(eta/2)*ket1;
+Op0x=ket0x*ket0x'
 ro=psi*psi';
-Pr0P=trace(ro*Op0P);
-Pr1P=trace(ro*Op1P);
+Pr=trace(psi*psi'*Op0x);
 end
 
-function [Pr0D,Pr1D]=PrD(psi)
-Op0D=[0.5 0.5;0.5 0.5];
-Op1D=[0.5 -0.5;-0.5 0.5];
+function Pr=Pr1X(psi)
+global eta ket0 ket1
+ket1x=cos(eta/2)*ket0-sin(eta/2)*ket1;
+Op1x=ket1x*ket1x';
 ro=psi*psi';
-Pr0D=trace(ro*Op0D);
-Pr1D=trace(ro*Op1D);
+Pr=trace(psi*psi'*Op1x);
+end
+
+function Pr=Pr0Y(psi)
+global eta ket0 ket1
+ket0y=cos(eta/2)*ket0+1i*sin(eta/2)*ket1;
+Op0y=ket0y*ket0y';
+ro=psi*psi';
+Pr=trace(psi*psi'*Op0y);
+end
+
+function Pr=Pr1Y(psi)
+global eta ket0 ket1
+ket1y=cos(eta/2)*ket0-1i*sin(eta/2)*ket1;
+Op1y=ket1y*ket1y';
+ro=psi*psi';
+Pr=trace(psi*psi'*Op1y);
 end
 
 function rb=randbin(p,size)

@@ -1,8 +1,8 @@
 % https://ru.wikipedia.org/wiki/ вантовый_протокол_4%2B2
 clear
 format short
-syms eta real
-eta=2*pi/3
+global eta real
+eta=pi/3
 ket0=[1;0]
 ket1=[0;1]
 
@@ -22,14 +22,15 @@ M0y=ket0y*ket0y'
 M1y=ket1y*ket1y'
 M0y+M1y
 
-trace(ket0y*ket0y'*M0y)
+trace(ket1x*ket1x'*M1x)
 
-a0d=1/(1+cos(eta))
-P0d=a0d*(1-ket0y*ket0y')
-P1d=a0d*(1-ket1y*ket1y')
-P_d=1-P0d-P1d
+% Sender A
+size=200;
+DataA=randi([0 1],1,size);
+disp('Alice Data')
+disp(DataA(1:10))
 
-a0p=1/(1+cos(eta))
-P0p=a0p*(1-ket0x*ket0x')
-P1p=a0p*(1-ket1x*ket1x')
-P_p=1-P0p-P1p
+BasisA=randi([0 1],1,size);
+disp('Alice Basis')
+disp(BasisA(1:10))
+
