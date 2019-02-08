@@ -4,7 +4,7 @@ format short
 digits(2)
 
 % Sender A
-size=500;
+size=1000;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
 disp(DataA(1:10))
@@ -16,7 +16,7 @@ disp('Photons in Channel')
 disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
-intr_exist=0;
+intr_exist=1;
 if intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
 GuessE=0;
@@ -30,7 +30,7 @@ GuessE_size=GuessE/size
 end
 
 % DarkNoise
-dn_exist=1;
+dn_exist=0;
 if dn_exist>0
 dnp=0.1;       % probability of dark noise bits
 darknoise=randbin(dnp,size);
@@ -132,15 +132,12 @@ for n=1:size
     else
         Pr=PrD(Psi(:,n));
     end    
-    % if Pr2>0.4 && Pr2<0.6
-    if Pr==0.5
-        %Data(n)=Pr;
+    if round(Pr,2)==0.5
         Data(n)= randi([0 1],1,1);    
     else
         Data(n)=round(Pr);
     end
 end
-% Data
 end
 
 function [Psi,DataE]=Intruder(Psi,BasisE)

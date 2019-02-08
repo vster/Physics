@@ -118,7 +118,7 @@ for n=1:size
     else
         Pr=PrD(Psi(:,n));
     end    
-    if Pr==0.5
+    if round(Pr,2)==0.5
         Data(n)= randi([0 1],1,1);    
     else
         Data(n)=round(Pr);
