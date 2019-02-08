@@ -4,7 +4,7 @@ format short
 digits(2)
 
 % Sender A
-size=200;
+size=1000;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
 disp(DataA(1:10))
@@ -81,10 +81,10 @@ for n=1:size
     else
         Pr(n)=trace(ro*Op1D);
     end   
-    Data(n)=1-Pr(n);
-    %if Pr(n)==0.5
-    %    Data(n)=randi([0 1],1,1);
-    %end
+    Data(n)=round(1-Pr(n),1);
+    if round(Pr(n),1)==0.5
+        Data(n)=randi([0 1],1,1);
+    end
 end
 end
 
@@ -95,7 +95,7 @@ DataE=Rcv(Psi,BasisE);
 disp('Eve Data')
 disp(DataE(1:10));
 for n=1:size
-    if DataE(n)==0.5
+    if round(DataE(n),2)==0.5
         DataE(n)=randi([0 1],1,1);
     end
 end

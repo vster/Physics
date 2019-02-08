@@ -5,7 +5,7 @@ format short
 digits(2)
 
 % Sender A
-size=200;
+size=1000;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
 disp(DataA(1:10))
@@ -17,7 +17,7 @@ disp('Photons in Channel')
 disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
-intr_exist=0;
+intr_exist=1;
 if intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
 GuessE=0;
@@ -104,6 +104,7 @@ function [Data,ErrBin]=Rcv(Psi,Basis)
 size=length(Psi(1,:));
 Data=zeros(1,size);
 ErrBin=zeros(1,size);
+PrVect=zeros(1,size);
 for n=1:size
     ket_psi=Psi(:,n);
     A=ket_psi'*ket_psi;
@@ -112,16 +113,16 @@ for n=1:size
         continue;
     end
     if Basis(n)==0
-        [Pr1,Pr2]=PrP(Psi(:,n));
+        PrVect(n)=PrP(Psi(:,n));
     elseif Basis(n)==1
-        [Pr1,Pr2]=PrD(Psi(:,n));
+        PrVect(n)=PrD(Psi(:,n));
     else
-        [Pr1,Pr2]=PrC(Psi(:,n));
+        PrVect(n)=PrC(Psi(:,n));
     end    
-    if Pr2>0.4 && Pr2<0.6
+    if round(PrVect(n),2)==0.5
         Data(n)= randi([0 1],1,1);    
     else
-        Data(n)=round(Pr2);
+        Data(n)=round(PrVect(n));
     end
 end
 % Data
@@ -137,27 +138,27 @@ disp(DataE(1:10));
 Psi=Snd(DataE,BasisE);
 end
 
-function [Pr0P,Pr1P]=PrP(psi)
+function Pr1P=PrP(psi)
 Op0P=[1 0;0 0];
 Op1P=[0 0;0 1];
 ro=psi*psi';
-Pr0P=trace(ro*Op0P);
+% Pr0P=trace(ro*Op0P);
 Pr1P=trace(ro*Op1P);
 end
 
-function [Pr0D,Pr1D]=PrD(psi)
+function Pr1D=PrD(psi)
 Op0D=[0.5 0.5;0.5 0.5];
 Op1D=[0.5 -0.5;-0.5 0.5];
 ro=psi*psi';
-Pr0D=trace(ro*Op0D);
+% Pr0D=trace(ro*Op0D);
 Pr1D=trace(ro*Op1D);
 end
 
-function [Pr0C,Pr1C]=PrC(psi)
+function Pr1C=PrC(psi)
 Op0C=[0.5 -0.5i;0.5i 0.5];
 Op1C=[0.5 0.5i;-0.5i 0.5];
 ro=psi*psi';
-Pr0C=trace(ro*Op0C);
+% Pr0C=trace(ro*Op0C);
 Pr1C=trace(ro*Op1C);
 end
 
