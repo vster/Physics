@@ -155,7 +155,7 @@ global eta ket0 ket1
 ket0x=cos(eta/2)*ket0+sin(eta/2)*ket1;
 Op0x=ket0x*ket0x';
 ro=psi*psi';
-Pr=trace(psi*psi'*Op0x);
+Pr=trace(ro*Op0x);
 end
 
 function Pr=Pr1X(psi)
@@ -163,7 +163,7 @@ global eta ket0 ket1
 ket1x=cos(eta/2)*ket0-sin(eta/2)*ket1;
 Op1x=ket1x*ket1x';
 ro=psi*psi';
-Pr=trace(psi*psi'*Op1x);
+Pr=trace(ro*Op1x);
 end
 
 function Pr=Pr0Y(psi)
@@ -171,7 +171,7 @@ global eta ket0 ket1
 ket0y=cos(eta/2)*ket0+1i*sin(eta/2)*ket1;
 Op0y=ket0y*ket0y';
 ro=psi*psi';
-Pr=trace(psi*psi'*Op0y);
+Pr=trace(ro*Op0y);
 end
 
 function Pr=Pr1Y(psi)
@@ -179,7 +179,7 @@ global eta ket0 ket1
 ket1y=cos(eta/2)*ket0-1i*sin(eta/2)*ket1;
 Op1y=ket1y*ket1y';
 ro=psi*psi';
-Pr=trace(psi*psi'*Op1y);
+Pr=trace(ro*Op1y);
 end
 
 function rb=randbin(p,size)
