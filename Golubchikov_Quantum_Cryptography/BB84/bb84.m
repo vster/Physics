@@ -2,6 +2,9 @@
 clear
 format short
 digits(2)
+global ket0 ket1
+ket0=[1;0];
+ket1=[0;1];
 
 % Sender A
 size=500;
@@ -78,10 +81,11 @@ ber_size=err/size
 
 function Psi=Snd(Data,Basis)
 size=length(Data);
-ket0P=[1;0];
-ket1P=[0;1];
-ket0D=1/sqrt(2)*(ket0P+ket1P);
-ket1D=1/sqrt(2)*(ket0P-ket1P);
+global ket0 ket1
+ket0P=ket0;
+ket1P=ket1;
+ket0D=1/sqrt(2)*(ket0+ket1);
+ket1D=1/sqrt(2)*(ket0-ket1);
 
 Psi=zeros(2,size);
 for n=1:size
@@ -143,7 +147,6 @@ function Pr1P=PrP(psi)
 Op0P=[1 0;0 0];
 Op1P=[0 0;0 1];
 ro=psi*psi';
-% Pr0P=trace(ro*Op0P);
 Pr1P=trace(ro*Op1P);
 end
 
@@ -151,7 +154,6 @@ function Pr1D=PrD(psi)
 Op0D=[0.5 0.5;0.5 0.5];
 Op1D=[0.5 -0.5;-0.5 0.5];
 ro=psi*psi';
-% Pr0D=trace(ro*Op0D);
 Pr1D=trace(ro*Op1D);
 end
 

@@ -2,6 +2,9 @@
 clear
 format short
 digits(2)
+global ket0 ket1
+ket0=[1;0];
+ket1=[0;1];
 
 % Sender A
 size=1000;
@@ -77,23 +80,24 @@ ber_size=err/size
 
 function Psi=Snd(Data,Basis)
 size=length(Data);
+global ket0 ket1
 % |0+>
-ket0P=[1;0];
+ket0P=ket0;
 % 1
 % 0
 
 % |1+>
-ket1P=[0;1];
+ket1P=ket1;
 % 0
 % 1
 
 % |0X>
-ket0D=1/sqrt(2)*(ket0P+ket1P);
+ket0D=1/sqrt(2)*(ket0+ket1);
 %    0.7071 
 %    0.7071
 
 % |1X>
-ket1D=1/sqrt(2)*(ket0P-ket1P);
+ket1D=1/sqrt(2)*(ket0-ket1);
 %    0.7071
 %   -0.7071
 
