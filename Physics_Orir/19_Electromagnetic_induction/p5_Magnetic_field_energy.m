@@ -9,6 +9,7 @@
 % q=q0*cos(w*t)
 % where
 % w=1/sqrt(L*C)
+clear
 syms q0 w t
 q=q0*cos(w*t)
 % V=q/C=(q0/C)*cos(w*t)=V0*cos(w*t)
@@ -44,4 +45,5 @@ U_V=U/(A*x0)
 
 % The total energy density of the electromagnetic field
 % dU/dV=1/(8*pi*k0)*(E^2+c^2*B^2) 
+syms E
 dU_dV=1/(8*pi*k0)*(E^2+c^2*B^2)                 % (19-10)
