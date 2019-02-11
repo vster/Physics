@@ -13,7 +13,7 @@ disp('Photons in Channel')
 disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
-intr_exist=1;
+intr_exist=0;
 if intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
 GuessE=0;

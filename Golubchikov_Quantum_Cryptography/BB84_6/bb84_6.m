@@ -22,7 +22,7 @@ disp('Photons in Channel')
 disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
-intr_exist=1;
+intr_exist=0;
 if intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
 GuessE=0;
@@ -34,17 +34,19 @@ end
 GuessE_size=GuessE/size
 end
 
-% DarkNoise
-dn_exist=0;
-if dn_exist>0
-dnp=0.1;       % probability of dark noise bits
-darknoise=randbin(dnp,size);
+% Channel with Photons Loss
+cpl_exist=1;
+if cpl_exist>0
+clp=0.2;       % probability of loss photons bits
+chploss=randbin(clp,size);
 psi00=[0;0];
 for n=1:size
-    if darknoise(n)==1
+    if chploss(n)==1
         PsiQC(:,n)=psi00;
     end
 end
+disp('Photons in Channel with Loss')
+disp(vpa(PsiQC(:,1:10)))
 end
 
 % Reciever B
