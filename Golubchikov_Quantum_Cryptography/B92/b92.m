@@ -4,7 +4,7 @@ format short
 digits(2)
 
 % Sender A
-size=1000;
+size=10000;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
 disp(DataA(1:10))
@@ -13,7 +13,7 @@ disp('Photons in Channel')
 disp(vpa(PsiQC(:,1:10)))
 
 % Intruder E
-intr_exist=0;
+intr_exist=1;
 if intr_exist>0 
 [PsiQC,DataE]=Intruder(PsiQC);
 GuessE=0;

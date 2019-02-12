@@ -12,7 +12,7 @@ ket0y=cos(eta/2)*ket0+1i*sin(eta/2)*ket1;
 ket1y=cos(eta/2)*ket0-1i*sin(eta/2)*ket1;
 
 % Sender A
-size=1000;
+size=10000;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
 disp(DataA(1:10))

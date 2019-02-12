@@ -35,7 +35,7 @@ end
 % Channel with Photons Loss
 cpl_exist=1;
 if cpl_exist>0
-clp=0.4;       % probability of loss photons bits
+clp=0.2;       % probability of loss photons bits
 chploss=randbin(clp,size);
 psi00=[0;0];
 for n=1:size
