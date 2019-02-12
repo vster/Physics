@@ -34,7 +34,7 @@ GuessE_size=GuessE/size
 end
 
 % Channel with Photons Loss
-cpl_exist=1;
+cpl_exist=0;
 if cpl_exist>0
 clp=0.3;       % probability of loss photons bits
 chploss=randbin(clp,size);

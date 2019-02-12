@@ -1,15 +1,16 @@
-% BB84 (4+2)
+% SARG
 clear
 format short
 digits(2)
+
 eta=2*pi/3
 ket0=[1;0];
 ket1=[0;1];
-global ket0x ket1x ket0y ket1y
-ket0x=cos(eta/2)*ket0+sin(eta/2)*ket1;
-ket1x=cos(eta/2)*ket0-sin(eta/2)*ket1;
-ket0y=cos(eta/2)*ket0+1i*sin(eta/2)*ket1;
-ket1y=cos(eta/2)*ket0-1i*sin(eta/2)*ket1;
+global ket0a ket1a ket0b ket1b
+ket0a=cos(eta/2)*ket0+sin(eta/2)*ket1;
+ket1a=cos(eta/2)*ket0-sin(eta/2)*ket1;
+ket0b=sin(eta/2)*ket0-cos(eta/2)*ket1;
+ket1b=sin(eta/2)*ket0+cos(eta/2)*ket1;
 
 % Sender A
 size=1000;
@@ -41,7 +42,7 @@ end
 % Channel with Photons Loss
 cpl_exist=0;
 if cpl_exist>0
-clp=0.2;       % probability of loss photons bits
+clp=0.3;       % probability of loss photons bits
 chploss=randbin(clp,size);
 psi00=[0;0];
 for n=1:size
@@ -93,22 +94,21 @@ ber_size=err/size
 good_size=good/size
 
 function Psi=Snd(Data,Basis)
-global eta ket0 ket1
 size=length(Data);
-global ket0x ket1x ket0y ket1y
+global ket0a ket1a ket0b ket1b
 Psi=zeros(2,size);
 for n=1:size
     if Basis(n)==0
         if Data(n)==0
-            Psi(:,n)=ket0x;
+            Psi(:,n)=ket0a;
         else
-            Psi(:,n)=ket1x;
+            Psi(:,n)=ket1a;
         end
     else
         if Data(n)==0
-            Psi(:,n)=ket0y;
+            Psi(:,n)=ket0b;
         else
-            Psi(:,n)=ket1y;
+            Psi(:,n)=ket1b;
         end
     end
 end
@@ -123,15 +123,15 @@ for n=1:size
     ro=ket_psi*ket_psi';
     if Basis(n)==0
         if Data(n)==0
-            PrVect(n)=Pr0X(Psi(:,n));
+            PrVect(n)=Pr0A(Psi(:,n));
         else
-            PrVect(n)=Pr1X(Psi(:,n));
+            PrVect(n)=Pr1A(Psi(:,n));
         end
     else
         if Data(n)==0
-            PrVect(n)=Pr0Y(Psi(:,n));
+            PrVect(n)=Pr0B(Psi(:,n));
         else
-            PrVect(n)=Pr1Y(Psi(:,n));
+            PrVect(n)=Pr1B(Psi(:,n));
         end
     end
 end
@@ -150,32 +150,32 @@ disp(DataE(1:10));
 Psi=Snd(DataE,BasisE);
 end
 
-function Pr=Pr0X(psi)
-global ket0x
-Op0x=ket0x*ket0x';
+function Pr=Pr0A(psi)
+global ket0a
+Op0a=ket0a*ket0a';
 ro=psi*psi';
-Pr=trace(ro*Op0x);
+Pr=trace(ro*Op0a);
 end
 
-function Pr=Pr1X(psi)
-global ket1x
-Op1x=ket1x*ket1x';
+function Pr=Pr1A(psi)
+global ket1a
+Op1a=ket1a*ket1a';
 ro=psi*psi';
-Pr=trace(ro*Op1x);
+Pr=trace(ro*Op1a);
 end
 
-function Pr=Pr0Y(psi)
-global ket0y
-Op0y=ket0y*ket0y';
+function Pr=Pr0B(psi)
+global ket0b
+Op0b=ket0b*ket0b';
 ro=psi*psi';
-Pr=trace(ro*Op0y);
+Pr=trace(ro*Op0b);
 end
 
-function Pr=Pr1Y(psi)
-global ket1y
-Op1y=ket1y*ket1y';
+function Pr=Pr1B(psi)
+global ket1b
+Op1b=ket1b*ket1b';
 ro=psi*psi';
-Pr=trace(ro*Op1y);
+Pr=trace(ro*Op1b);
 end
 
 function rb=randbin(p,size)
