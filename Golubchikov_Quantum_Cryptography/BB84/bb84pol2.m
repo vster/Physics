@@ -2,7 +2,8 @@
 clear
 format short
 digits(2)
-global ket0 ket1
+global ket0 ket1 showvec
+showvec=15
 ket0=[1;0];
 ket1=[0;1];
 
@@ -10,15 +11,15 @@ ket1=[0;1];
 size=500;
 DataA=randi([0 1],1,size);
 disp('Alice Data')
-disp(DataA(1:10))
+disp(DataA(1:showvec))
 
 BasisA=randi([0 1],1,size);
 disp('Alice Basis')
-disp(BasisA(1:10))
+disp(BasisA(1:showvec))
 
 PsiQC=Snd(DataA,BasisA);
 disp('Photons in Channel')
-disp(vpa(PsiQC(:,1:10)))
+disp(vpa(PsiQC(:,1:showvec)))
 
 % Intruder E
 intr_exist=0;
@@ -34,9 +35,9 @@ GuessE_size=GuessE/size
 end
 
 % Channel with Photons Loss
-cpl_exist=0;
+cpl_exist=1;
 if cpl_exist>0
-clp=0.3;       % probability of loss photons bits
+clp=0.1;       % probability of loss photons bits
 chploss=randbin(clp,size);
 psi00=[0;0];
 for n=1:size
@@ -45,7 +46,7 @@ for n=1:size
     end
 end
 disp('Photons in Channel with Loss')
-disp(vpa(PsiQC(:,1:10)))
+disp(vpa(PsiQC(:,1:showvec)))
 end
 
 % Reciever B
@@ -53,17 +54,18 @@ BasisB=randi([0 1],1,size);
 % BasisB=zeros(1,size);
 % BasisB=ones(1,size);
 disp('Bob Basis')
-disp(BasisB(1:10))
+disp(BasisB(1:showvec))
 [DataB,ErrBinB]=Rcv(PsiQC,BasisB);
 disp('Bob Data')
-disp(DataB(1:10))
+disp(DataB(1:showvec))
 if cpl_exist>0
     disp('Error Bits in Channel')
-    disp(ErrBinB(1:10))
+    disp(ErrBinB(1:showvec))
 end
 
 EqBas=0;
 err=0;
+good=0;
 EqBasVect=zeros(1,size);
 for n=1:size
     if BasisA(n)==BasisB(n)
@@ -71,13 +73,16 @@ for n=1:size
         EqBas=EqBas+1;
         if DataA(n)~=DataB(n) || ErrBinB(n)==1
             err=err+1;
+        else
+            good=good+1;
         end
     end
 end
 disp('Matching of Alice and Bob Bases')
-disp(EqBasVect(1:10))
+disp(EqBasVect(1:showvec))
 ber_eq=err/EqBas
 ber_size=err/size
+good_eq=good/EqBas
 
 function Psi=Snd(Data,Basis)
 size=length(Data);
@@ -131,15 +136,16 @@ end
 end
 
 function [Psi,DataE]=Intruder(Psi,BasisE)
+global showvec
 size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
 % BasisE=zeros(1,size);
 % BasisE=ones(1,size);
 disp('Eve Basis')
-disp(BasisE(1:10));
+disp(BasisE(1:showvec));
 [DataE,ErrBinE]=Rcv(Psi,BasisE);
 disp('Eve Data')
-disp(DataE(1:10));
+disp(DataE(1:showvec));
 Psi=Snd(DataE,BasisE);
 end
 
