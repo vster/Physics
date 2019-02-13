@@ -19,7 +19,7 @@ disp('Photons in Channel')
 disp(vpa(PhaseQC(1:10)))
 
 % Intruder E
-intr_exist=1;
+intr_exist=0;
 if intr_exist>0 
 [PhaseQC,DataE]=Intruder(PhaseQC);
 GuessE=0;
@@ -60,6 +60,7 @@ disp('Matching of Alice and Bob Bases')
 disp(EqBasVect(1:10))
 ber_eq=err/EqBas
 ber_size=err/size
+good_eq=good/EqBas
 good_size=good/size
 
 function Phase=Snd(Data,Basis)
