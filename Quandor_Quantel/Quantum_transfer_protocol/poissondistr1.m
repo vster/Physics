@@ -1,8 +1,9 @@
 clear
 mu=0.2
-size=1000
+size=100
 pr=poisdistr(mu,size);
 disp(pr(1:20))
+[lambdahat,lambdaci] = poissfit(pr)
 
 function poisrand=poisdistr(mu,size)
 d(1)=0;
