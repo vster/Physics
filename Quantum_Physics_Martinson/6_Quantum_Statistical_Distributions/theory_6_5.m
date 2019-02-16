@@ -15,17 +15,19 @@ n=int(dn/dE,E,0,inf)
 
 F(E)=dn/dE
 % F(E)=(2^(1/2)*E^(1/2)*m0^(3/2))/
-%     /(hp^3*pi^2*(exp(-(EF - E)/(T*k)) + 1))
+%     /(hp^3*pi^2*(exp(-(EF - E)/(T*k)) + 1))                    (6.56)
 % This function is called the energy 
 % distribution function of free electrons.
 
 F0(E)=limit(F(E),T,0)
 % piecewise(E == 0, 0, E ~= 0 & EF == E, (2^(1/2)*E^(1/2)*m0^(3/2))/(2*hp^3*pi^2))
-pretty(F0(E))
+pretty(F0(E))                                              % (6.57)
 
 syms EF0
 assume(EF0>0)
 dn=piecewise(E >EF0, 0, E<EF0, (2^(1/2)*E^(1/2)*m0^(3/2))/(2*hp^3*pi^2)*dE)
+% piecewise(EF0 < E, 0, 
+%     E < EF0, (2^(1/2)*E^(1/2)*dE*m0^(3/2))/(2*hp^3*pi^2))       (6.58)
 
 % <f>=int(0:inf)f(E)*F(E)*dE/int(0:inf)F(E)*dE            (6.59)
 % <f>=1/n*int(0:inf)f(E)*F(E)*dE
