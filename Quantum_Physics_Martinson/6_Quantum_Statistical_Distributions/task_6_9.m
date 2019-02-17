@@ -1,6 +1,6 @@
 % Find the compressibility factor (elasticity coefficient) alfa
 % of the electron gas in copper at a temperature T=0 K
-
+clear
 syms p V(p)
 % alfa=1/V*dV/dp=d(log(V))/dp
 alfa=diff(log(V),p)
@@ -12,14 +12,16 @@ alfa=diff(log(N)-log(n),p)
 % -diff(n(p), p)/n(p)
 
 % p=2/3*n*<E>
-syms EF0 hp m0 n
+syms EF0 hp m0 n real
+syms pi
 Em=3/5*EF0
 Em=subs(Em,EF0,(hp^2/(2*m0))*(3*pi^2*n)^(2/3))
 p1=2/3*n*Em
 % (hp^2*n*(3*n*pi^2)^(2/3))/(5*m0)
 syms p
 eq1=p==(hp^2*n*(3*n*pi^2)^(2/3))/(5*m0)
-n=solve(eq1,n)
+nsol=solve(eq1,n)
+n=nsol(1)
 % (15^(3/5)*m0^(3/5)*p^(3/5))/(3*pi^(4/5)*(hp^6)^(1/5))
 syms A
 n=A*p^(3/5)
