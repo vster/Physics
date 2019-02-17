@@ -5,6 +5,7 @@
 
 % p*c+m*c^2=p1*c+Ee1
 % (p-p1+m*c)^2=(Ee1/c)^2           (24-3)
+clear
 syms p p1 m c Ee1
 eq1=(p-p1+m*c)^2-(Ee1/c)^2
 eq1=expand(eq1)
@@ -23,6 +24,7 @@ eq3=simplify(eq3)
 p1sol=solve(eq3,p1)
 % (c*m*p)/(p + c*m - p*cos(teta))
 % p1=h/lam1 => 
+syms h
 lam1=h/p1
 lam1=subs(lam1,p1,p1sol)
 % (h*(p + c*m - p*cos(teta)))/(c*m*p)
