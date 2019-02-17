@@ -19,13 +19,12 @@ F(E)=dn/dE
 % This function is called the energy 
 % distribution function of free electrons.
 
-F0(E)=limit(F(E),T,0)
-% piecewise(E == 0, 0, E ~= 0 & EF == E, (2^(1/2)*E^(1/2)*m0^(3/2))/(2*hp^3*pi^2))
-pretty(F0(E))                                              % (6.57)
-
 syms EF0
 assume(EF0>0)
-dn=piecewise(E >EF0, 0, E<EF0, (2^(1/2)*E^(1/2)*m0^(3/2))/(2*hp^3*pi^2)*dE)
+F(E)=piecewise(E<EF0 == E,(2^(1/2)*E^(1/2)*m0^(3/2))/(hp^3*pi^2),0)
+pretty(F(E))                                              % (6.57)
+
+dn=piecewise(E >EF0, 0, E<EF0, (2^(1/2)*E^(1/2)*m0^(3/2))/(hp^3*pi^2)*dE)
 % piecewise(EF0 < E, 0, 
 %     E < EF0, (2^(1/2)*E^(1/2)*dE*m0^(3/2))/(2*hp^3*pi^2))       (6.58)
 
@@ -33,12 +32,12 @@ dn=piecewise(E >EF0, 0, E<EF0, (2^(1/2)*E^(1/2)*m0^(3/2))/(2*hp^3*pi^2)*dE)
 % <f>=1/n*int(0:inf)f(E)*F(E)*dE
 
 n1=int(dn/dE,E,0,EF0)
-% (2^(1/2)*EF0^(3/2)*m0^(3/2))/(3*hp^3*pi^2)
+% (2*2^(1/2)*EF0^(3/2)*m0^(3/2))/(3*hp^3*pi^2)
 syms n
 eq1=(n==n1)
 EF0sol=solve(eq1,EF0)
-EF0=simplify(EF0sol(2))
-% (6^(2/3)*pi^(4/3)*(hp^3*n)^(2/3))/(2*m0)
+EF0=simplify(EF0sol(1))
+% (3^(2/3)*pi^(4/3)*(hp^3*n)^(2/3))/(2*m0)
 EF0=(hp^2/(2*m0))*(3*pi^2*n)^(2/3)                      % (6.60)
 % This is Fermi energy
 

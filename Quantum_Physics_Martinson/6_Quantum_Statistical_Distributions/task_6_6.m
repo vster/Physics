@@ -4,7 +4,7 @@ clear
 % <E>=int(0:inf)E*F(E)*dE/int(0:inf)F(E)*dE
 syms E m0 hp EF0 real 
 syms pi
-FE=(2^(1/2)*E^(1/2)*m0^(3/2))/(2*hp^3*pi^2)
+FE=(2^(1/2)*E^(1/2)*m0^(3/2))/(hp^3*pi^2)
 Em=int(E*FE,E,0,EF0)/int(FE,E,0,EF0)
 % (3*EF0)/5
 % Emcl=3/2*k*T
