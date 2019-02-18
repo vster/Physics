@@ -27,3 +27,7 @@ Phi11=subs(Phi11,B,B1)
 % (4*pi*A*I*N*k0)/(c^2*x0)
 L=subs(L,Phi1,Phi11)
 % (4*pi*A*N^2*k0)/(c^2*x0)   (solenoid inductance)   (19-7)
+
+syms m N C s
+L_si=subs(L,[A N k0 c x0],[m^2 1 N*m^2/C^2 m/s m])
+% (4*pi*N*m*s^2)/C^2~N*m*s^2/C^2~kg*m/s^2*m/s^2/C^2~kg*m^2/C^2~H

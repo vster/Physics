@@ -16,6 +16,10 @@ EMF=W/q
 syms A t
 EMF=B*A*w*sin(w*t)                 % (19-1)
 
+syms T m Hz s
+EMF_si=subs(EMF,[B A w t],[T m^2 Hz s])
+% Hz*T*m^2*sin(Hz*s)~T*m^2/s~V*s/m^2*m^2/s~V
+
 % PhiB=int()B*dA=B*l1*l2*cos(teta)=B*A*cos(w*t)
 PhiB=B*A*cos(w*t)
 dPhiB=diff(PhiB,t)

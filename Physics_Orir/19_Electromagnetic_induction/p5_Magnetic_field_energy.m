@@ -43,6 +43,10 @@ U=subs(U,I,I1)
 U_V=U/(A*x0)
 % U/V=(B^2*c^2)/(8*k0*pi) - magnetic field energy density   (19-9)
 
+syms T m s N C
+U_V_si=subs(U_V,[B c k0],[T m/s N*m^2/C^2])
+% (C^2*T^2)/(8*N*s^2*pi)~(N*m/m^3)~J/m^3
+
 % The total energy density of the electromagnetic field
 % dU/dV=1/(8*pi*k0)*(E^2+c^2*B^2) 
 syms E
