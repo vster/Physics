@@ -4,7 +4,9 @@ syms ket1 ket2
 state0=1/sqrt(2)*(ket1+ket2)
 state1=1/sqrt(2)*(ket1-ket2)
 
-syms av ah
+syms av ah real
+assume(av>0)
+assume(ah>0)
 ketL0=1/sqrt(2)*[av  av 0;0 0 0]
 % [ (2^(1/2)*av)/2, (2^(1/2)*av)/2, 0]
 % [              0,              0, 0]
@@ -36,6 +38,8 @@ ketR1=1/sqrt(2)*[ket_vac,ketV,-ketV]
 % [ 0,              0,               0]
 
 syms alfa beta
+assume(alfa>0)
+assume(beta>0)
 ket_psi_in_L_p=1/sqrt(2)*[(alfa*ketV+beta*ketH),+(alfa*ketV+beta*ketH),ket_vac]
 % [ (2^(1/2)*alfa*av)/2, (2^(1/2)*alfa*av)/2, 0]
 % [ (2^(1/2)*ah*beta)/2, (2^(1/2)*ah*beta)/2, 0]
@@ -50,18 +54,10 @@ ket_psi_in_R_m=1/sqrt(2)*[ket_vac,(alfa*ketV+beta*ketH),-(alfa*ketV+beta*ketH)]
 % [ 0, (2^(1/2)*ah*beta)/2, -(2^(1/2)*ah*beta)/2]
 
 
-OpUf=1/sqrt(2)*[1 1;-1 1]
-OpUb=OpUf'
-OpA1=[av;ah]
-OpA2=[av;ah]
+ket_psi_in=ketL0
 
-syms t r
-SU=[t r;-r' t']
-FM=[0 -1;-1 0]
-
-syms teta teta1 teta2 delta
-OpRot(teta)=[cos(teta) sin(teta);-sin(teta) cos(teta)]
-OpTL=[exp(i*delta) 0;0 exp(-i*delta)]
-OpSU=OpRot(teta1)*OpTL*OpRot(teta2)
-OpSU=simplify(OpSU)
-
+ket_psi_1=1/2*[ket_psi_in,ket_vac]
+ket_psi_2=1/2*[ket_vac,ket_psi_in]
+ket_psi_out=ket_psi_1+ket_psi_2
+(ket_psi_out(1,2)/av)^2+(ket_psi_out(2,2)/ah)^2
+data=1-abs(ket_psi_out(1,2))/(av/sqrt(2))
