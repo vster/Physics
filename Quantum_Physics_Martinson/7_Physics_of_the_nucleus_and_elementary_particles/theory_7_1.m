@@ -42,3 +42,38 @@ muc1=vpa(subs(muc,[e hp mp],[1.6e-19 1.05e-34 1.67e-27]))
 % Nuclear forces
 
 % tau=hp/(mm*c^2)                       (7.2)
+
+% Cloud virtual mesons
+% rm=c*tau=c*hp/(mm*c^2)=hp/(mm*c)=Lamm              (7.3)
+% here
+% Lamm - Compton wavelength of a meson
+
+% Nuclear forces have a finite radius of action
+% rc=Lamm=hp/(mm*c)                                 (7.4)
+% rc=(1-2)Phi
+syms hp c rc
+mm=hp/(rc*c)
+mm1=vpa(subs(mm,[hp rc c],[1.05e-34 1.5e-15 3e8]))
+% 2.33e-28 kg
+mm2=mm1/9.1e-31
+% 256.0 me
+
+% Muon
+% 207 me
+
+% pi-meson
+% pion
+% pi+ pi-
+% mpi= 273 me 
+% E0 = 140 MeV
+% pi0
+% mpi = 264 me
+% E0 = 135 MeV
+
+% p + n <-> n+pi+n <-> n + p                      (7.5)
+
+% p + n -> p + n + pi0                            (7.6)
+
+% phi(r)=-phi0*exp(-a*r)/r                        (7.7)
+% where phi0 and a - const
+% a = 1/rc = mm*c/hp
