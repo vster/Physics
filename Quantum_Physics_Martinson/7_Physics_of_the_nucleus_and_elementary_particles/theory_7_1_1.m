@@ -11,7 +11,7 @@ syms Dm
 Esv=Dm*c^2
 
 % X_Z_A
-syms Z A mp mn mc
+syms Z A mp mn mc mH
 Esv=(Z*mp+(A-Z)*mn-mc)*c^2                      % (7.9)
 % 1 a.e.m. = 1.6606e-27 kg = 931.5 MeV
 Esv=931.5*(Z*mp+(A-Z)*mn-mc) % MeV                (7.10)
