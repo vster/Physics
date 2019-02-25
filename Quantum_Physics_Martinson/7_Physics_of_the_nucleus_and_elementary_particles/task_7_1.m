@@ -1,4 +1,5 @@
-syms R A
+clear
+syms R A mp
 Vc=4/3*pi*R^3*A
 digits(3)
 Vc1=vpa(subs(Vc,R,1.3e-15))
