@@ -11,3 +11,22 @@
 % N0-N(t)=N0*(1-exp(-lam*t)                       (7.16)
 % A=lam*N=-dN/dt=lam*N0*exp(-lam*t)=A0*exp(-lam*t)    (7.17)
 % A0=lam*N0 - The activity of the radioactive drug at time t = 0
+
+% Specific activity
+% a=A/m
+
+% N0/2=N0*exp(-lam*T12)
+% T12=log(2)/lam=0.693/lam                        (7.18)
+clear
+syms t lam N N0
+N=N0*exp(-lam*t)
+
+% Find the average lifetime of the core tau
+tau=int(t*lam*N,t,0,inf)/N0
+% -lam*(limit(exp(-t*lam)*(t*lam + 1), t, Inf)/lam^2 - 1/lam^2)
+tau=simplify(tau)
+% -(limit(exp(-lam*t)*(lam*t + 1), t, Inf) - 1)/lam
+% 1/lam
+tau=1/lam                                       % (7.19)
+syms tau
+T12=0.693*tau
