@@ -30,3 +30,16 @@ tau=simplify(tau)
 tau=1/lam                                       % (7.19)
 syms tau
 T12=0.693*tau
+
+% The law of complex radioactive decay
+syms t lam1 lam2 N1(t) N2(t)
+eq1=diff(N1,t)+lam1*N1                   % (7.20a)
+eq2=diff(N2,t)-lam1*N1+lam2*N2           % (7.20b)
+
+syms N10 N20
+N1(t)=N10*exp(-lam1*t)                   % (7.21a)
+N2(t)=N10*(lam1/(lam2-lam1))*exp(-lam1*t)+...
+    (N20-N10*(lam1/(lam2-lam1)))*exp(-lam2*t)       % (7.21b)
+
+% If N20=0
+N2(t)=N10*(lam1/(lam2-lam1))*(exp(-lam1*t)-exp(-lam2*t))
