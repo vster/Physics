@@ -35,3 +35,8 @@
 % sig ~ E^(-1/2)
 % For most reactions
 % sig = 0.1...10 barn
+
+% Nuclear fission
+% U(92,235) + n -> Cs(55,140) + Rb(37,94) + 2*n + 200MeV     (7.35)
+%           25 min            2.3 days 
+% U(92,239) -----> Np(93,239) -------> Pu(94,239)            (7.36)
