@@ -40,3 +40,11 @@
 % U(92,235) + n -> Cs(55,140) + Rb(37,94) + 2*n + 200MeV     (7.35)
 %           25 min            2.3 days 
 % U(92,239) -----> Np(93,239) -------> Pu(94,239)            (7.36)
+
+% Thermonuclear reaction
+% H(1,2) + H(1,3) -> n(0,1) + He(2,4) + 17.6 MeV             (7.37)
+% n(0,1) + Li(3,6) -> H(1,3) + He(2,4)                       (7.38)
+
+% nc*tau = 1e14 s/cm^3 = 1e20 s/m^3                          (7.39)
+% A condition (7.39) is called a Lawson criterion.
+
