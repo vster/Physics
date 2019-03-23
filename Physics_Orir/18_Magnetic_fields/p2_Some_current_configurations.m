@@ -32,9 +32,9 @@ B_si=subs(B,[k0 c ro v r],[N*m^2/C^2 m/s C/m^3 m/s m])
 % Flat currents
 % If=sigma*v  
 % B=1/c^2*cross(v,E)
-% B=(2*pi*k0/c^2)*If
+% B=(2*pi*k0/c^2)*If         - flat current  (18-5)
 syms If
-B=(2*pi*k0/c^2)*If
+B=(2*pi*k0/c^2)*If                          
 
 B_si=subs(B,[k0 c If],[N*m^2/C^2 m/s A/m])
 % (2*pi*A*N*s^2)/(C^2*m)~(N)/(A*m)~T
