@@ -3,20 +3,22 @@ clear
 format short
 digits(2)
 global ket0 ket1
+global showbits
 ket0=[1;0];
 ket1=[0;1];
+showbits=10;
 
 % Sender A
 size=1000;
-DataA=randi([0 1],1,size);
-disp('Alice Data')
-disp(DataA(1:10))
 BasisA=randi([0 1],1,size);
 disp('Alice Basis')
-disp(BasisA(1:10))
+disp(BasisA(1:showbits))
+DataA=randi([0 1],1,size);
+disp('Alice Data')
+disp(DataA(1:showbits))
 PsiQC=Snd(DataA,BasisA);
 disp('Photons in Channel')
-disp(vpa(PsiQC(:,1:10)))
+disp(vpa(PsiQC(:,1:showbits)))
 
 % Intruder E
 intr_exist=0;
@@ -28,7 +30,7 @@ for n=1:size
         GuessE=GuessE+1;
     end
 end
-% disp(round(PsiQC(:,1:10),2))
+% disp(round(PsiQC(:,1:showbits),2))
 GuessE_size=GuessE/size
 end
 
@@ -44,7 +46,7 @@ for n=1:size
     end
 end
 disp('Photons in Channel with Loss')
-disp(vpa(PsiQC(:,1:10)))
+disp(vpa(PsiQC(:,1:showbits)))
 end
 
 % Reciever B
@@ -52,13 +54,13 @@ BasisB=randi([0 1],1,size);
 % BasisB=zeros(1,size);
 % BasisB=ones(1,size);
 disp('Bob Basis')
-disp(BasisB(1:10))
+disp(BasisB(1:showbits))
 [DataB,ErrBinB]=Rcv(PsiQC,BasisB);
 disp('Bob Data')
-disp(DataB(1:10))
+disp(DataB(1:showbits))
 if cpl_exist>0
     disp('Error Bits in Channel')
-    disp(ErrBinB(1:10))
+    disp(ErrBinB(1:showbits))
 end
 
 EqBas=0;
@@ -74,7 +76,7 @@ for n=1:size
     end
 end
 disp('Matching of Alice and Bob Bases')
-disp(EqBasVect(1:10))
+disp(EqBasVect(1:showbits))
 ber_eq=err/EqBas
 ber_size=err/size
 
@@ -145,6 +147,7 @@ end
 end
 
 function [Psi,DataE]=Intruder(Psi,BasisE)
+global showbits
 size=length(Psi(1,:));
 BasisE=randi([0 1],1,size);
 % BasisE=zeros(1,size);
@@ -153,7 +156,7 @@ disp('Eve Basis')
 disp(BasisE(1:10));
 [DataE,ErrBinE]=Rcv(Psi,BasisE);
 disp('Eve Data')
-disp(DataE(1:10));
+disp(DataE(1:showbits));
 Psi=Snd(DataE,BasisE);
 end
 
