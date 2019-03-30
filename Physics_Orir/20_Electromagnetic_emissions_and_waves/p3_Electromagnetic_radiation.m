@@ -15,4 +15,9 @@
 % and
 % d2Bz/dx2=1/c^2*d2Bz/dt2  (wave equation)   (20-5)
 % diff(Bz,x,2)=1/c^2*diff(Bz,t,2)
+clear
+syms x t c
+syms Bz(x,t)
+eq1=diff(Bz,x,2)-1/c^2*diff(Bz,t,2)
+% diff(Bz(x, t), x, x) - diff(Bz(x, t), t, t)/c^2
 
