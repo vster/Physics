@@ -33,7 +33,7 @@ eps_m=subs(eps_m,ksi,hp*w/(k*T))
 % eps_m=(hp*w)/(exp((hp*w)/(T*k)) - 1)           (1.37)
 pretty(eps_m)
 
-syms J s K
+syms J s K c
 eps_m_si=subs(eps_m,[hp w T k],[J*s 1/s K J/K])
 % J/(exp(1) - 1) ~ J
 
